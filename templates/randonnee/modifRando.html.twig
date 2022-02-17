@@ -1,0 +1,138 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Modifier{% endblock %}
+ {% block css %}
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../back/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../back/assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../back/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="../back/assets/images/favicon.png" />
+    <link rel='stylesheet' href='https://codepen.io/uzcho_/pen/RmOWmw.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'><link rel="stylesheet" href="../back/assets/css/style2.css">
+<link rel='stylesheet' href='https://codepen.io/uzcho_/pen/RmOWmw.css'>
+    {% endblock %}
+    
+             {%block image%}
+                  <img src="../back/assets/images/faces/Image1.png" alt="image">
+                  {%endblock%}
+{% block body %}
+
+
+
+
+
+           
+
+
+
+
+ <div class="main-panel">
+          <div class="content-wrapper">
+   
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+                  <ul class="nav nav-tabs tab-transparent" role="tablist">
+                    <li class="nav-item">
+                    <a class="nav-link "  href="{{path('ajouterRando')}}" aria-selected="true" > Ajouter </a>
+                     
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link "  href="{{path('listerRando')}}" aria-selected="true">Afficher</a>
+                    </li>
+                   <li class="nav-item">
+                    <a class="nav-link active"  href="" aria-selected="true" > Modifier </a>
+                     
+                    </li>
+                  </ul>
+                 
+                  <div class="d-md-block d-none">
+                    <a href="#" class="text-light p-1"><i class="mdi mdi-view-dashboard"></i></a>
+                    <a href="#" class="text-light p-1"><i class="mdi mdi-dots-vertical"></i></a>
+                  </div>
+                </div>
+                
+                </div>  
+
+
+                     
+                      
+                 
+
+
+
+
+
+
+               
+ <div class="container">
+	 
+{{ form_start(formA,{'attr': {'novalidate': 'novalidate'}} ) }}
+		<div class="field" tabindex="1">
+		<td>{{form_label(formA.nomRando,"Nom randonnée")}}</td>
+		<td>{{form_widget(formA.nomRando)}}</td>
+<td>{{form_errors(formA.nomRando)}}</td>
+		</div>
+		<div class="field" tabindex="2">
+		<td>{{form_label(formA.destination,"Destination")}}</td>
+<td>{{form_widget(formA.destination)}}</td>
+<td>{{form_errors(formA.destination)}}</td>
+	</div>
+		<div class="field" tabindex="3">
+<td>{{form_label(formA.categorieRando,"Categorie")}}</td>
+<td>{{form_widget(formA.categorieRando)}}</td>
+<td>{{form_errors(formA.categorieRando)}}</td>
+	</div>
+    <div class="field" tabindex="3">
+<td>{{form_label(formA.dateRando,"Date de la randonnée")}}</td>
+<td>{{form_widget(formA.dateRando)}}</td>
+<td>{{form_errors(formA.dateRando)}}</td>
+	</div>
+    <div class="field" tabindex="4">
+<td>{{form_label(formA.dureeRando,"Duree de la randonnée")}}</td>
+<td>{{form_widget(formA.dureeRando)}}</td>
+<td>{{form_errors(formA.dureeRando)}}</td>
+	</div>
+    <div class="field" tabindex="4">
+<td>{{form_label(formA.description,"Description")}}</td>
+<td>{{form_widget(formA.description)}}</td>
+<td>{{form_errors(formA.description)}}</td>
+
+
+	
+		</div>
+		<button type="submit">Modifier</button>
+	
+	{{form_end(formA)}}
+
+ </div>
+
+<!-- This is not part of Pen -->
+<a class="me" href="https://codepen.io/uzcho_/pens/popular/?grid_type=list" target="_blank" style="color:#000"></a>
+          </div>
+           </div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="../back/assets/js/off-canvas.js"></script>
+    <script src="../back/assets/js/hoverable-collapse.js"></script>
+    <script src="../back/assets/js/misc.js"></script>
+     <script  src="../back/assets/js/script.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../back/assets/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    {% endblock %}
+
+   
