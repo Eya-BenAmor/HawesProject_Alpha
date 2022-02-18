@@ -7,7 +7,6 @@ Connect Plus Admin is packed with all the features that fit your needs but not c
 
 Although the template has a design like none other, it is easily customizable to suit your requirements. Connect Plus Admin comes with a clean and well-commented code that makes it easy to work with the template. Thus making it an ideal pick for jump starting your project.
 
-
 <h1>Credits:</h1>
 
 - Bootstrap 4
@@ -29,11 +28,9 @@ Connect Plus Admin is designed to work flawlessly with all the latest and modern
 
 <h1>License Information:</h1>
 
-
 Connect Plus Admin is released under MIT license. Connect Plus Admin is a free Bootstrap 4 admin template developed by BootstrapDash. Feel free to download it, use it, share it, get creative with it.
 
 <h1>How to use Connect Plus Admin?</h1>
-
 
 1 - Click the Clone or Download button in GitHub and download as a ZIP file or you can enter the command git clone https://github.com/BootstrapDash/ConnectPlusAdmin-Free-Bootstrap-Admin-Template in you terminal to get a copy of this template.
 
@@ -47,23 +44,23 @@ Connect Plus Admin is released under MIT license. Connect Plus Admin is a free B
 
 <h1>How to Contribute?:</h1>
 
-
 We love your contributions and we welcome them wholeheartedly. We believe the more the merrier.
 To contribute make sure you have a Node.js and npm installed. Now run the command gulp --version. If the command returns with the Gulp version number, it means you have Gulp installed. If not you need to run the command npm install --global gulp-cli to install Gulp.
 
 <h2>Next</h2>
 
 After Gulp has been installed, follow the steps below to contribute.
-  <br>
-	1 - Fork and clone the repo of Connect Plus Admin.
-  <br>
-	2 - Run the command npm install to install all the dependencies.
-  <br>
-	3 - Enter the command gulp serve. This will open Connect Plus Admin in your default browser.
-  <br>
-	4 - Make your valuable contribution
-  <br>
-	5 - Submit a pull request.
+<br>
+1 - Fork and clone the repo of Connect Plus Admin.
+<br>
+2 - Run the command npm install to install all the dependencies.
+<br>
+3 - Enter the command gulp serve. This will open Connect Plus Admin in your default browser.
+<br>
+4 - Make your valuable contribution
+<br>
+5 - Submit a pull request.
+
   <hr>
 Do you need a template with more features and functionalities? Get more with our collection of the premium template with more plugins, eye catching animations, UI components, and sample pages all fitting together with a high-quality design.
 
