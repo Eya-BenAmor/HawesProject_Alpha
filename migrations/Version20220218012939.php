@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20220218012939 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE commentaire ADD idclient_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE commentaire ADD CONSTRAINT FK_67F068BC67F0C0D4 FOREIGN KEY (idclient_id) REFERENCES client (id)');
+        $this->addSql('CREATE INDEX IDX_67F068BC67F0C0D4 ON commentaire (idclient_id)');
+        $this->addSql('ALTER TABLE publication ADD idclient_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE publication ADD CONSTRAINT FK_AF3C677967F0C0D4 FOREIGN KEY (idclient_id) REFERENCES client (id)');
+        $this->addSql('CREATE INDEX IDX_AF3C677967F0C0D4 ON publication (idclient_id)');
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE client CHANGE nom nom VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE prenom prenom VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE commentaire DROP FOREIGN KEY FK_67F068BC67F0C0D4');
+        $this->addSql('DROP INDEX IDX_67F068BC67F0C0D4 ON commentaire');
+        $this->addSql('ALTER TABLE commentaire DROP idclient_id, CHANGE contenu contenu VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE publication DROP FOREIGN KEY FK_AF3C677967F0C0D4');
+        $this->addSql('DROP INDEX IDX_AF3C677967F0C0D4 ON publication');
+        $this->addSql('ALTER TABLE publication DROP idclient_id, CHANGE nom nom VARCHAR(50) NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE description description VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE photo photo VARCHAR(255) NOT NULL COLLATE `utf8mb4_unicode_ci`');
+    }
+}
