@@ -25,33 +25,19 @@ class CommentaireController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/com", name="com")
+  /**
+     * @Route("/listcom/{id}", name="com")
      */
-    public function listcom(): Response
-    {$rep=$this->getDoctrine()->getRepository(commentaire::class);
+    public function listcom($id): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(commentaire::class);
 
-        $commentaire =$rep-> findAll();
-
-        return $this->render('commentaire.html.twig', [
-            'commentaire' => $commentaire,
-        ]);
-    }
-
-    
-/**
-     * @Route("/listcom", name="listcom")
-     */
-    public function list(): Response
-    {$rep=$this->getDoctrine()->getRepository(commentaire::class);
-
-        $commentaire =$rep-> findAll();
+        $commentaire =$rep->ListCommentaireByPublication($id);
 
         return $this->render('commentaire/listc.html.twig', [
             'commentaire' => $commentaire,
         ]);
     }
-
 
 /**
      * @Route("/addcom/{id}", name="addcom")
@@ -75,7 +61,7 @@ $commentaire->setPublication($publication);
 $em=$this->getDoctrine()->getManager();
 $em->persist($commentaire);
 $em->flush();
-return $this->redirectToRoute('listcom');
+return $this->redirectToRoute('listpubfront');
 }
 
 
@@ -102,7 +88,7 @@ if ($form->isSubmitted() && $form->isValid())
 //$commentaire=$form->getData();
 $em=$this->getDoctrine()->getManager();
 $em->flush();
-return $this->redirectToRoute('listcom');
+return $this->redirectToRoute('listpubfront');
 }
 
 
@@ -124,7 +110,7 @@ return $this->redirectToRoute('listcom');
       $em->remove($commentaire);
       $em->flush(); 
 
-        return $this->redirectToRoute('listcom');
+        return $this->redirectToRoute('listpubfront');
        
     }
 

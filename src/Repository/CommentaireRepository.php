@@ -19,6 +19,20 @@ class CommentaireRepository extends ServiceEntityRepository
         parent::__construct($registry, Commentaire::class);
     }
 
+
+
+    public function ListCommentaireByPublication($id){
+return $this->createQueryBuilder('c')
+->join('c.publication','s')
+->addSelect('s')
+->where('s.id=:id')
+->setParameter('id',$id)
+->getQuery()
+->getResult();
+
+
+}
+
     // /**
     //  * @return Commentaire[] Returns an array of Commentaire objects
     //  */

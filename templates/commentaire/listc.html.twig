@@ -1,20 +1,19 @@
-
 {% extends 'base-front.html.twig' %}
 
  
 {% block css %}
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="front/css/bootstrap.min.css" rel="stylesheet">
-    <link href="front/css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="front/css/aos.min.css" rel="stylesheet">
-    <link href="front/css/swiper.css" rel="stylesheet">
-     <link href="front/css/style.css" rel="stylesheet">
-   
+  
+    <link href="../front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../front/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../front/css/aos.min.css" rel="stylesheet">
+    <link href="../front/css/swiper.css" rel="stylesheet">
+     <link href="../front/css/style.css" rel="stylesheet">
   
 
     <!-- Favicon -->
-    <link rel="icon" href="front/assets/images/.png">
+    <link rel="icon" href="../front/assets/images/.png">
     {% endblock  %}
 
      {% block menu %}
@@ -23,7 +22,7 @@
         <div class="container">
 
             <!-- Image Logo -->
-            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="front/assets/images/logo.svg" alt="alternative"></a> -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="../front/assets/images/logo.svg" alt="alternative"></a> -->
 
             <!-- Text Logo - Use this if you don't have a graphic logo -->
             <a class="navbar-brand logo-text"  href={{path('addpub')}}>Hawes</a>
@@ -95,7 +94,10 @@
 
               <div class="swiper-container card-slider">
         <div class="swiper-wrapper">
-         <!-- Slide -->  {%for  c in commentaire %}
+         <!-- Slide -->
+         
+           {%for  c in commentaire %}
+
                   <div class="swiper-slide">  
                   
                           
@@ -172,11 +174,12 @@
 
     {% block js %}
     <!-- Scripts -->
-    <script src="front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
-    <script src="front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
-    <script src="front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
-    <script src="front/js/aos.js"></script><!-- AOS on Animation Scroll -->
-    <script src="front/js/script.js"></script>  <!-- Custom scripts -->
+     <script src="../front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
+    <script src="../front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="../front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
+    <script src="../front/js/aos.js"></script><!-- AOS on Animation Scroll -->
+    <script src="../front/js/script.js"></script>  <!-- Custom scripts -->
+   
    
     {% endblock  %}
 

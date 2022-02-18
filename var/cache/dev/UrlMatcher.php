@@ -14,8 +14,6 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/commentaire' => [[['_route' => 'commentaire', '_controller' => 'App\\Controller\\CommentaireController::index'], null, null, null, false, false, null]],
-        '/com' => [[['_route' => 'com', '_controller' => 'App\\Controller\\CommentaireController::listcom'], null, null, null, false, false, null]],
-        '/listcom' => [[['_route' => 'listcom', '_controller' => 'App\\Controller\\CommentaireController::list'], null, null, null, false, false, null]],
         '/publication' => [[['_route' => 'publication', '_controller' => 'App\\Controller\\PublicationController::index'], null, null, null, false, false, null]],
         '/acceuil' => [[['_route' => 'acceuil', '_controller' => 'App\\Controller\\PublicationController::indexFront'], null, null, null, false, false, null]],
         '/listpubfront' => [[['_route' => 'listpubfront', '_controller' => 'App\\Controller\\PublicationController::listpubfront'], null, null, null, false, false, null]],
@@ -39,14 +37,15 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/addcom/([^/]++)(*:185)'
+                .'|/listcom/([^/]++)(*:186)'
+                .'|/addcom/([^/]++)(*:210)'
                 .'|/update(?'
-                    .'|com/([^/]++)(*:215)'
-                    .'|pub/([^/]++)(*:235)'
+                    .'|com/([^/]++)(*:240)'
+                    .'|pub/([^/]++)(*:260)'
                 .')'
                 .'|/delete(?'
-                    .'|com/([^/]++)(*:266)'
-                    .'|pub/([^/]++)(*:286)'
+                    .'|com/([^/]++)(*:291)'
+                    .'|pub/([^/]++)(*:311)'
                 .')'
             .')/?$}sD',
     ],
@@ -58,11 +57,12 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        185 => [[['_route' => 'addcom', '_controller' => 'App\\Controller\\CommentaireController::add'], ['id'], null, null, false, true, null]],
-        215 => [[['_route' => 'updatecom', '_controller' => 'App\\Controller\\CommentaireController::update'], ['id'], null, null, false, true, null]],
-        235 => [[['_route' => 'updatepub', '_controller' => 'App\\Controller\\PublicationController::update'], ['id'], null, null, false, true, null]],
-        266 => [[['_route' => 'deletecom', '_controller' => 'App\\Controller\\CommentaireController::deletepub'], ['id'], null, null, false, true, null]],
-        286 => [
+        186 => [[['_route' => 'com', '_controller' => 'App\\Controller\\CommentaireController::listcom'], ['id'], null, null, false, true, null]],
+        210 => [[['_route' => 'addcom', '_controller' => 'App\\Controller\\CommentaireController::add'], ['id'], null, null, false, true, null]],
+        240 => [[['_route' => 'updatecom', '_controller' => 'App\\Controller\\CommentaireController::update'], ['id'], null, null, false, true, null]],
+        260 => [[['_route' => 'updatepub', '_controller' => 'App\\Controller\\PublicationController::update'], ['id'], null, null, false, true, null]],
+        291 => [[['_route' => 'deletecom', '_controller' => 'App\\Controller\\CommentaireController::deletepub'], ['id'], null, null, false, true, null]],
+        311 => [
             [['_route' => 'deletepub', '_controller' => 'App\\Controller\\PublicationController::deletepub'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

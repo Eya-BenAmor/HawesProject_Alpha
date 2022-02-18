@@ -5,11 +5,11 @@
 {% block css %}
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="front/css/bootstrap.min.css" rel="stylesheet">
-    <link href="front/css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="front/css/aos.min.css" rel="stylesheet">
-    <link href="front/css/swiper.css" rel="stylesheet">
-     <link href="front/css/style.css" rel="stylesheet">
+    <link href="../front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../front/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../front/css/aos.min.css" rel="stylesheet">
+    <link href="../front/css/swiper.css" rel="stylesheet">
+     <link href="../front/css/style.css" rel="stylesheet">
    
   
 
@@ -97,7 +97,7 @@
 
             <div class="my-3">
               <a class="btn" href="{{path('addcom',{'id':p.id})}}" >ajouter commentaire</a>
-              <a class="btn" href="{{path('listcom')}}" >consulter mes commentaires de la publication</a>
+              <a class="btn" href="{{path('listcom',{'id':p.id})}}" >consulter mes commentaires de la publication</a>
             </div>
           </div>
           <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
@@ -141,11 +141,11 @@
 
     {% block js %}
     <!-- Scripts -->
-    <script src="front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
-    <script src="front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
-    <script src="front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
-    <script src="front/js/aos.js"></script><!-- AOS on Animation Scroll -->
-    <script src="front/js/script.js"></script>  <!-- Custom scripts -->
+    <script src="../front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
+    <script src="../front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="../front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
+    <script src="../front/js/aos.js"></script><!-- AOS on Animation Scroll -->
+    <script src="../front/js/script.js"></script>  <!-- Custom scripts -->
    
     {% endblock  %}
 
