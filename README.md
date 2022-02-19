@@ -1,7 +1,3 @@
-# hello
-## hello
-### hello
-* hello
 <a href="http://www.bootstrapdash.com/demo/connect-plus-free/jquery/template/index.html" target="_blank"><img src="screenshot.jpg"></a>
 
 <h1>Connect Plus Free Admin Template</h1>
