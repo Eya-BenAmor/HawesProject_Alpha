@@ -14,7 +14,13 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Validator\Validation;
-use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Knp\Component\Pager\PaginatorInterface;
+
+
+
+
+
 
 class PublicationController extends AbstractController
 {   
@@ -41,11 +47,18 @@ class PublicationController extends AbstractController
 /**
      * @Route("/listpubfront", name="listpubfront")
      */
-    public function listpubfront(): Response
+    public function listpubfront(Request $request, PaginatorInterface $paginator): Response
     { 
         $rep=$this->getDoctrine()->getRepository(publication::class);
         
         $publication =$rep-> findAll();
+        //$paginator  = $this->get('knp_paginator');
+
+        $publication = $paginator->paginate(
+            $publication, // Requête contenant les données à paginer 
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            3// Nombre de résultats par page
+        );
       
         return $this->render('publication/listpubfront.html.twig', [
             'publication' => $publication,
@@ -69,9 +82,8 @@ class PublicationController extends AbstractController
 
 /**
      * @Route("/addpub", name="addpub")
-     * @param LoggerInterface $logger
      */
-    public function add(Request $request, LoggerInterface $logger): Response
+    public function add(Request $request): Response
     {
         $publication=new publication() ; // nouvelle instance 
         $form=$this->createForm(PublicationType::class,null);
@@ -110,9 +122,7 @@ class PublicationController extends AbstractController
     $em->flush();
     return $this->redirectToRoute('listpubfront');
     }
-    else {
-         $logger->info($request);
-    }
+    
 
 
         return $this->render('publication/add.html.twig', [
@@ -126,18 +136,40 @@ class PublicationController extends AbstractController
 
     
 
-    
-     /**
+    /**
      * @Route("/updatepub/{id}", name="updatepub")
      */
     public function update(Request $request, $id): Response
     { $rep=$this->getDoctrine()->getRepository(publication::class);
-        $publication=$rep->find($id); // nouvelle instance 
+        $publication=$rep->find($id); 
         $form=$this->createForm(PublicationType::class,$publication);
         $form->handleRequest($request);
+        $rep=$this->getDoctrine()->getRepository(Client::class);
+     
+      $client=$rep->find('1');
 if ($form->isSubmitted() && $form->isValid())
 {
-//$publication=$form->getData();
+$publication=$form->getData();
+   $publication->setIdclient($client);
+        $photoFile = $form->get('photo')->getData();
+// this condition is needed because the 'photo' field is not required
+        // so the imagefile must be processed only when a file is uploaded
+        if ($photoFile)  {
+            $fileName = md5(uniqid()) . '.' . $photoFile->guessExtension();
+            // Move the file to the directory where pictures are stored
+            try {
+                $photoFile->move(
+                    $this->getParameter('photos_directory'),
+                    $fileName
+                ); 
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
+            // updates the 'pictureFilename' property to store the image file name
+            // instead of its contents
+            $publication->setPhoto($fileName);
+            }
 $em=$this->getDoctrine()->getManager();
 $em->flush();
 return $this->redirectToRoute('listpub');

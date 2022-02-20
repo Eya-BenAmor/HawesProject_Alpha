@@ -26,7 +26,7 @@ class CommentaireController extends AbstractController
     }
 
   /**
-     * @Route("/listcom/{id}", name="com")
+     * @Route("/listcom/{id}", name="listcom")
      */
     public function listcom($id): Response
     {

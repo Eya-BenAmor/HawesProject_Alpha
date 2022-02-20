@@ -9,9 +9,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints\Image;
+use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Mime\MimeTypes;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
+
+
+
 
 class PublicationType extends AbstractType
 {
@@ -39,10 +50,14 @@ class PublicationType extends AbstractType
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
+                              'maxSize' => '500K',
                             'image/jpg',
                             'image/png',
                             'image/jpeg',
                         ],
+
+                        'mimeTypesMessage' => 'Images autorisées: JPG, JPEG, PNG',
+                    
                         
                     ])
                 ],

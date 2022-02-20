@@ -57,7 +57,7 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        186 => [[['_route' => 'com', '_controller' => 'App\\Controller\\CommentaireController::listcom'], ['id'], null, null, false, true, null]],
+        186 => [[['_route' => 'listcom', '_controller' => 'App\\Controller\\CommentaireController::listcom'], ['id'], null, null, false, true, null]],
         210 => [[['_route' => 'addcom', '_controller' => 'App\\Controller\\CommentaireController::add'], ['id'], null, null, false, true, null]],
         240 => [[['_route' => 'updatecom', '_controller' => 'App\\Controller\\CommentaireController::update'], ['id'], null, null, false, true, null]],
         260 => [[['_route' => 'updatepub', '_controller' => 'App\\Controller\\PublicationController::update'], ['id'], null, null, false, true, null]],

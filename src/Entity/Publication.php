@@ -10,6 +10,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints\Image;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 
 /**
@@ -40,7 +44,11 @@ class Publication
 
     /**
      * @ORM\Column(type="string", length=255) 
-    
+     
+     * @Assert\File(
+     * mimeTypes = {"image/jpeg", "image/png","image/jpg"},
+     * mimeTypesMessage = "Only .jpeg .png .jpg  Extension valide"
+     * )
      */
     private $photo;
 
@@ -143,4 +151,8 @@ class Publication
 
         return $this;
     }
+
+
+
+    
 }

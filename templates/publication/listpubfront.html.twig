@@ -97,7 +97,7 @@
 
             <div class="my-3">
               <a class="btn" href="{{path('addcom',{'id':p.id})}}" >ajouter commentaire</a>
-              <a class="btn" href="{{path('listcom',{'id':p.id})}}" >consulter mes commentaires de la publication</a>
+              <a class="btn" href="{{path('listcom',{'id':p.id})}}" >consulter les commentaires de cette publication</a>
             </div>
           </div>
           <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
@@ -117,6 +117,13 @@
      
     </section>
     {% endfor %}
+
+             
+
+              {{ knp_pagination_render(publication) }} 
+              
+        
+   
 
      
      

@@ -16,7 +16,7 @@ return [
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::body'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token'], ['text', '/_profiler']], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception_panel::stylesheet'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token'], ['text', '/_profiler']], [], []],
     'commentaire' => [[], ['_controller' => 'App\\Controller\\CommentaireController::index'], [], [['text', '/commentaire']], [], []],
-    'com' => [['id'], ['_controller' => 'App\\Controller\\CommentaireController::listcom'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/listcom']], [], []],
+    'listcom' => [['id'], ['_controller' => 'App\\Controller\\CommentaireController::listcom'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/listcom']], [], []],
     'addcom' => [['id'], ['_controller' => 'App\\Controller\\CommentaireController::add'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/addcom']], [], []],
     'updatecom' => [['id'], ['_controller' => 'App\\Controller\\CommentaireController::update'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/updatecom']], [], []],
     'deletecom' => [['id'], ['_controller' => 'App\\Controller\\CommentaireController::deletepub'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/deletecom']], [], []],
