@@ -50,13 +50,13 @@ class PublicationType extends AbstractType
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
-                              'maxSize' => '500K',
+                            'maxSize' => '50K',
                             'image/jpg',
                             'image/png',
                             'image/jpeg',
                         ],
 
-                        'mimeTypesMessage' => 'Images autorisées: JPG, JPEG, PNG',
+                        'mimeTypesMessage' => 'vous devez insérer seulement une image',
                     
                         
                     ])
