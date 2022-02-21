@@ -71,6 +71,24 @@ class Randonnee
      */
     private $participant;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+    
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\NotBlank(
+     *      message = "champs ne doit pas etre vide")
+     */
+    private $prix;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $note;
+
     public function __construct()
     {
         $this->participant = new ArrayCollection();
@@ -179,6 +197,42 @@ class Randonnee
                 $participant->setRandonnee(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(int $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }
