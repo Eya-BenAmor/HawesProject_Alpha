@@ -108,7 +108,18 @@
 <div class="text-danger">
 <td>{{form_errors(formA.description)}}</td>
 </div>
-
+ <div class="field" tabindex="4">
+<td>{{form_label(formA.prix,"Prix de la randonnée")}}</td>
+<td>{{form_widget(formA.prix)}}</td>
+<div class="text-danger">
+<td>{{form_errors(formA.prix)}}</td>
+	</div>
+   <div class="field" tabindex="4">
+<td>{{form_label(formA.image,"Image")}}</td>
+<td>{{form_widget(formA.image)}}</td>
+<div class="text-danger">
+<td>{{form_errors(formA.image)}}</td>
+	</div>
 	
 		</div>
 		<button type="submit">Ajouter</button>
