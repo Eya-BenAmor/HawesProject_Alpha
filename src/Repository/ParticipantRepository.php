@@ -47,4 +47,31 @@ class ParticipantRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function showByRandonnee($id)
+    {
+        return $this->createQueryBuilder('p')
+               ->join('p.randonnee', 'r')
+            ->addSelect('r')
+            ->where('r.id LIKE :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function showByClient()
+    {
+        return $this->createQueryBuilder('p')
+               ->join('p.client', 'c')
+            ->addSelect('c')
+            ->where('c.id LIKE :id')
+            ->setParameter('id', '1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
 }

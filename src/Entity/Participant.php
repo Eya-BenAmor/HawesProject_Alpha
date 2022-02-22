@@ -32,6 +32,12 @@ class Participant
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide"
      * )
+      * @Assert\Regex(
+     *     pattern     = " /^\+216\d{8}$/"
+     
+    *      ,message = "Numero invalide un numéro doit commencer par  +216 et contenir 7 chiffres aprés "
+     * )
+   
      */
     private $tel;
 
@@ -40,6 +46,7 @@ class Participant
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide"
      * )
+  
      */
     private $maladie;
 

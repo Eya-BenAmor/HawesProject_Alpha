@@ -13,11 +13,13 @@
     <link rel="stylesheet" href="back/assets/css/style.css">
     <link rel="shortcut icon" href="back/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><link rel="stylesheet" href="back/assets/css/style.css">
 
     {% endblock %}
     {%block image %}
                   <img src="back/assets/images/faces/Image1.png" alt="image">
               {%endblock%}
+             
 {% block body %}
 
 
@@ -57,14 +59,14 @@
   </tr>
   {%for r in parti %}
   <tr>
-   <td> {{r.client.nom}} </td>
+   <td> {{r.client.nom~r.client.prenom}} </td>
 <td> {{r.randonnee.nomRando}}  </td>
     <td> {{r.age}} </td>
 <td> {{r.tel}}  </td>
 <td> {{r.maladie}}  </td>
 <td> {{r.classe}}  </td>
-<td> <a href="{{path('modifierParticipant',{'id':r.id})}}" > Modifier</a>
-<a href="{{path('supprimerParticipant',{'id':r.id})}}" > Supprimer</a> </td>
+<td> <a href="{{path('modifierParticipant',{'id':r.id})}}" class="fa fa-edit"  > </a>
+<a href="{{path('supprimerParticipant',{'id':r.id})}}"  class="fa fa-trash" ></a> </td>
   </tr>
   
   

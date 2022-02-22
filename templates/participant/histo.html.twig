@@ -4,14 +4,16 @@
 {% block css %}
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="front/css/bootstrap.min.css" rel="stylesheet">
-    <link href="front/css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="front/css/aos.min.css" rel="stylesheet">
-    <link href="front/css/swiper.css" rel="stylesheet">
-    <link href="front/css/style.css" rel="stylesheet">
+    <link href="../front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../front/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../front/css/aos.min.css" rel="stylesheet">
+    <link href="../front/css/swiper.css" rel="stylesheet">
+     <link href="../front/css/style.css" rel="stylesheet">
+    <link href="../front/css/style4.css" rel="stylesheet">
+  
 
     <!-- Favicon -->
-    <link rel="icon" href="front/assets/images/.png">
+    <link rel="icon" href="../front/assets/images/.png">
     {% endblock  %}
 
      {% block menu %}
@@ -20,10 +22,10 @@
         <div class="container">
 
             <!-- Image Logo -->
-            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="front/assets/images/logo.svg" alt="alternative"></a> -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="../front/assets/images/logo.svg" alt="alternative"></a> -->
 
             <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <a class="navbar-brand logo-text" href={{path('index')}} >Hawes</a>
+            <a class="navbar-brand logo-text"  href={{path('index')}}>Hawes</a>
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -32,19 +34,18 @@
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="">Home</a>
+                        <a class="nav-link " aria-current="page" href={{path('indexFront')}}>Home</a>
                     </li>
-                    
-                        <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{{('histo')}}">Historiques</a>
-                    </li>                    
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{path('histo')}}">Historiques</a>
+                    </li>       
                     <li class="nav-item dropdown">
                        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Randonnées</a>
                         
                       
                          <ul class="dropdown-menu" aria-labelledby="dropdown01">
                          
-                           <li><a class="dropdown-item" href={{('chercherRando3')}}>A pied</a></li>
+                           <li><a class="dropdown-item" href={{('chercherRando3')}} >A pied</a></li>
                             <li><div class="dropdown-divider"></div></li>
                             <li><a class="dropdown-item" href={{('chercherRando1')}}>Au vélo</a></li>
                             <li><div class="dropdown-divider"></div></li>
@@ -54,79 +55,87 @@
                         </ul>
                         
                     </li>
-                  
+                    
                 
             </div> <!-- end of navbar-collapse -->
         </div> <!-- end of container -->
     </nav> <!-- end of navbar -->
     <!-- end of navigation -->
-
+                       
 {% endblock  %}
-
 {% block index %}
- 
-    
-    <!-- Home -->
-    <section class="home py-5 d-flex align-items-center" id="header">
+
+
+
+
+
+ <section class="home py-5 d-flex align-items-center" id="header">
         <div class="container text-light py-5"  data-aos="fade-right"> 
             <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span><br>Pour vous</h1>
             <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
            
-           
         </div> <!-- end of container -->
     </section> <!-- end of home -->
 
+
+
+
+ 
+  <section class="services d-flex align-items-center py-5" id="services">
+        <div class="container text-light">
+            <div class="text-center pb-4" >
+            
+                <h2 class="py-2">Supprimer et modifier vos participations</h2>
+               
+            </div>
+            
+            <div class="row gy-4 py-2" data-aos="zoom-in">
+             {%for p in parti %}
+             
+                <div class="col-lg-4">
+                
+                    <div class="card bg-transparent">
+                    
+                        <h4 class="py-2">{{p.randonnee.nomRando}}</h4>
+                        <table >
+  
+  <tr>
+    
+    <th>Date</th>
+    <th>Destination</span></th>
+    <th>Prix</th>
    
-
-
    
-   
+    <th>Action</th>
+  </tr>
+ 
+  <tr>
 
+   <td> {{p.randonnee.dateRando|date('d-m-Y')}} </td>
 
-    <!-- Contact -->
-    <section class="location text-light py-5" id="contact">
-        <div class="container-fluid text-light">
-            <div class="row">
-                <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end align-items-center px-lg-5" data-aos="fade-right">
-                    <div style="width:90%">
-                        <div class="text-center text-lg-start py-4 pt-lg-0">
-                            <p>Se connecter</p>
-                           
-                        </div>
-                        <div>
-                            <div class="row" >
-                                <div class="col-lg-6">
-                                    <div class="form-group py-2">
-                                        <input type="text" class="form-control form-control-input" id="exampleFormControlInput1" placeholder="Enter name">
-                                    </div>                                
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group py-2">
-                                        <input type="email" class="form-control form-control-input" id="exampleFormControlInput2" placeholder="Enter phone number">
-                                    </div>                                 
-                                </div>
-                            </div>
-                            <div class="form-group py-1">
-                                <input type="email" class="form-control form-control-input" id="exampleFormControlInput3" placeholder="Enter email">
-                            </div>  
-                            <div class="form-group py-2">
-                                <textarea class="form-control form-control-input" id="exampleFormControlTextarea1" rows="6" placeholder="Message"></textarea>
-                            </div>                            
-                        </div>
-                        <div class="my-3">
-                            <a class="btn form-control-submit-button" href="#your-link">Submit</a>
-                        </div>
-                    </div> <!-- end of div -->
-                </div> <!-- end of col -->
-                <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
-                    <img class="img-fluid d-none d-lg-block" src="front/assets/images/contact.jpg" alt="contact">        
-                </div> <!-- end of col -->
+    <td> {{p.randonnee.destination}} </td>
+<td> {{p.randonnee.prix}}  </td>
+
+<td> <a href="{{path('modifierHisto',{'id':p.id})}}"  class="fa fa-edit" > </a>
+<a href="{{path('supprimerParticipant',{'id':p.id})}}"  class="fa fa-trash" ></a> </td>
+  </tr>
+  
+  
+  
+</table>    
+                    </div>
+                </div>
+                {% endfor %}
             </div> <!-- end of row -->
         </div> <!-- end of container -->
-    </section> <!-- end of contact -->
+    </section> <!-- end of services -->
+
+{% do parti.setPageRange(1) %} {# Le nombre de numero de page qui s'affiche sur une page #}
+        {{ knp_pagination_render(parti, 'pagination/fron.html.twig') }}
 
 
-    <!-- Location -->
+
+  <!-- Location -->
     <section class="location text-light py-5">
         <div class="container" data-aos="zoom-in">
             <div class="row">
@@ -163,7 +172,8 @@
     </section> <!-- end of location -->
 
 
-   
+
+
 {% endblock  %}
 {% block footer  %}
     <!-- Bottom -->
@@ -176,13 +186,20 @@
            
         </div> <!-- end of container -->
     </div> <!-- end of bottom -->
+     <!-- Back To Top Button -->
+    <button onclick="topFunction()" id="myBtn">
+        <img src="../front/assets/images/up-arrow.png" alt="alternative">
+    </button>
+    <!-- end of back to top button -->
+
  {% endblock  %}
 
-{% block js %}
+    {% block js %}
     <!-- Scripts -->
-    <script src="front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
-    <script src="front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
-    <script src="front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
-    <script src="front/js/aos.js"></script><!-- AOS on Animation Scroll -->
-    <script src="front/js/script.js"></script>  <!-- Custom scripts -->
+    <script src="../front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
+    <script src="../front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="../front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
+    <script src="../front/js/aos.js"></script><!-- AOS on Animation Scroll -->
+    <script src="../front/js/script.js"></script>  <!-- Custom scripts -->
+   
     {% endblock  %}

@@ -7,10 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=RandonneeRepository::class)
+ 
+ 
+ * @UniqueEntity("nomRando", message = "Le randonnée existe déjà")
  */
+
 class Randonnee
 {
     /**
@@ -22,9 +26,11 @@ class Randonnee
 
     /**
      * @ORM\Column(type="string", length=255)
+    
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide"
      * )
+     
      */
     private $nomRando;
 
@@ -32,6 +38,7 @@ class Randonnee
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide")
+     
      */
     private $destination;
 
@@ -81,11 +88,14 @@ class Randonnee
      * @ORM\Column(type="float")
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide")
+     *  @Assert\PositiveOrZero(
+     *      message = "prix ne peut pas etre negative"
+     * )
      */
     private $prix;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $note;
 
@@ -225,12 +235,12 @@ class Randonnee
         return $this;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?float
     {
         return $this->note;
     }
 
-    public function setNote(int $note): self
+    public function setNote(float $note): self
     {
         $this->note = $note;
 

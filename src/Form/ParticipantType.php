@@ -22,15 +22,15 @@ class ParticipantType extends AbstractType
                     'oui' => 'oui',
                     'non' => 'non',
                    
-                ],
+                ]
                
             ])
             ->add('classe',ChoiceType::class, [
                 'choices'  => [
-                    'debutant' => 'debutant',
-                    'intermediaire' => 'intermediaire',
+                    'débutant' => 'debutant',
+                    'intermédiaire' => 'intermediaire',
                     'habitue' => 'habitue',
-                ],
+                ]
                
             ])
         ;

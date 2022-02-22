@@ -74,22 +74,26 @@
    <div class="field" tabindex="2">
 		<td>{{form_label(formA.tel,"Numéro de téléphone")}}</td>
 <td>{{form_widget(formA.tel)}}</td>
+ <div class="text-danger">
 <td>{{form_errors(formA.tel)}}</td>
-	</div>
+	</div></div>
   <div class="field" tabindex="2">
 		<td>{{form_label(formA.age,"Age")}}</td>
 <td>{{form_widget(formA.age)}}</td>
+ <div class="text-danger">
 <td>{{form_errors(formA.age)}}</td>
-	</div>
+	</div></div>
 		<div class="field" tabindex="1">
 		<td>{{form_label(formA.maladie,"Souffre-t-il de maladies chroniques ou d'allergie?")}}</td>
 		<td>{{form_widget(formA.maladie)}}</td>
+    
 <td>{{form_errors(formA.maladie)}}</td>
 		</div>
 		
 		<div class="field" tabindex="1">
 		<td>{{form_label(formA.classe,"C'est un randonneur ?")}}</td>
 		<td>{{form_widget(formA.classe)}}</td>
+    
 <td>{{form_errors(formA.classe)}}</td>
 		</div>
 
@@ -107,6 +111,7 @@
 {% endblock %}
 
 {% block js %}
+ <script src="../back/assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="../back/assets/js/off-canvas.js"></script>
     <script src="../back/assets/js/hoverable-collapse.js"></script>
     <script src="../back/assets/js/misc.js"></script>
