@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints\Image;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Notifications\NouveauPublicationNotification;
 
 
 

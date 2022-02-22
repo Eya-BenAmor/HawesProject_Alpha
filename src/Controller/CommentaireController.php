@@ -12,6 +12,7 @@ use App\Repository\CommentaireRepository ;
 use App\Form\CommentaireType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Notifications\NouveauPublicationNotification;
 
 class CommentaireController extends AbstractController
 {

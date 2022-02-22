@@ -10,7 +10,7 @@ if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
 }
 
 require dirname(__DIR__, 3).''.\DIRECTORY_SEPARATOR.'vendor/autoload.php';
-require __DIR__.'/ContainerSPigoXq/srcApp_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerSsIcv9W/srcApp_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -26,6 +26,7 @@ $classes[] = 'Symfony\Bundle\SecurityBundle\SecurityBundle';
 $classes[] = 'Twig\Extra\TwigExtraBundle\TwigExtraBundle';
 $classes[] = 'Symfony\Bundle\WebServerBundle\WebServerBundle';
 $classes[] = 'Knp\Bundle\PaginatorBundle\KnpPaginatorBundle';
+$classes[] = 'Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle';
 $classes[] = 'Symfony\Component\HttpClient\TraceableHttpClient';
 $classes[] = 'Symfony\Contracts\HttpClient\HttpClientInterface';
 $classes[] = 'Symfony\Component\HttpClient\HttpClient';
@@ -36,6 +37,7 @@ $classes[] = 'Symfony\Component\HttpFoundation\RequestMatcher';
 $classes[] = 'Symfony\Component\DependencyInjection\ServiceLocator';
 $classes[] = 'App\Controller\CommentaireController';
 $classes[] = 'App\Controller\PublicationController';
+$classes[] = 'App\Notifications\NouveauPublicationNotification';
 $classes[] = 'App\Form\CommentaireType';
 $classes[] = 'App\Form\PublicationType';
 $classes[] = 'App\Repository\ClientRepository';
@@ -311,6 +313,7 @@ $classes[] = 'Symfony\Component\HttpClient\DataCollector\HttpClientDataCollector
 $classes[] = 'Doctrine\Bundle\DoctrineBundle\DataCollector\DoctrineDataCollector';
 $classes[] = 'Doctrine\Bundle\MigrationsBundle\Collector\MigrationsCollector';
 $classes[] = 'Doctrine\Bundle\MigrationsBundle\Collector\MigrationsFlattener';
+$classes[] = 'Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector';
 $classes[] = 'Symfony\Component\Mailer\DataCollector\MessageDataCollector';
 $classes[] = 'Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector';
 $classes[] = 'Symfony\Component\HttpKernel\EventListener\ProfilerListener';
@@ -408,6 +411,17 @@ $classes[] = 'Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStor
 $classes[] = 'Symfony\Component\HttpFoundation\Session\Storage\MetadataBag';
 $classes[] = 'Symfony\Component\HttpKernel\EventListener\SessionListener';
 $classes[] = 'Symfony\Component\HttpKernel\EventListener\StreamedResponseListener';
+$classes[] = 'Symfony\Bundle\SwiftmailerBundle\Command\DebugCommand';
+$classes[] = 'Symfony\Bundle\SwiftmailerBundle\Command\NewEmailCommand';
+$classes[] = 'Symfony\Bundle\SwiftmailerBundle\Command\SendEmailCommand';
+$classes[] = 'Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener';
+$classes[] = 'Swift_Mailer';
+$classes[] = 'Swift_Plugins_MessageLogger';
+$classes[] = 'Swift_Events_SimpleEventDispatcher';
+$classes[] = 'Swift_Transport';
+$classes[] = 'Symfony\Bundle\SwiftmailerBundle\DependencyInjection\SwiftmailerTransportFactory';
+$classes[] = 'Swift_Transport_SpoolTransport';
+$classes[] = 'Swift_MemorySpool';
 $classes[] = 'Symfony\Component\Translation\Extractor\ChainExtractor';
 $classes[] = 'Symfony\Component\Translation\Extractor\PhpExtractor';
 $classes[] = 'Symfony\Bridge\Twig\Translation\TwigExtractor';

@@ -16,6 +16,12 @@ use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\File\File;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Notifications\NouveauPublicationNotification;
+use PHPMailer\PHPMailer\PHPMailer;
+use Swift_SmtpTransport;
+use Swift_Message;
+
+require_once 'C:\Users\EYA\Desktop\HawesProject_Alpha\vendor\autoload.php';
 
 
 
@@ -120,13 +126,17 @@ class PublicationController extends AbstractController
     $em=$this->getDoctrine()->getManager();
     $em->persist($publication);
     $em->flush();
+     $this->notify_creation->notify();
     return $this->redirectToRoute('listpubfront');
     }
     
 
 
         return $this->render('publication/add.html.twig', [
+
             'formP' => $form->createView(),
+
+           
         ]);
 
        
@@ -199,7 +209,20 @@ return $this->redirectToRoute('listpub');
     }
 
 
+/**
+ * @var NouveauPublicationNotification
+ */
+private $notify_creation;
 
+/**
+ * PublicationController constructor.
+ * @param NouveauPublicationNotification $notify_creation
+ */
+public function __construct(NouveauPublicationNotification $notify_creation)
+{
+    $this->notify_creation = $notify_creation;
+    
+}
 
 
     
