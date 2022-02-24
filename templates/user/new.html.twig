@@ -1,0 +1,11 @@
+{% extends 'base-front.html.twig' %}
+
+{% block title %}Hawes{% endblock %}
+
+{% block body %}
+    <h1>Sign Up</h1>
+
+    {{ include('user/_form.html.twig') }}
+
+    <a href="{{ path('user_index') }}">back to list</a>
+{% endblock %}
