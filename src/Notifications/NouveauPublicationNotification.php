@@ -66,7 +66,7 @@ class NouveauPublicationNotification
 
         // On construit le mail
         $message = (new Swift_Message('Consulter votre forum il y a une nouvelle publication !!'))
-      ->setFrom(['haweswebsite@gmail.com' => 'FROM_haweswebsite'])
+      ->setFrom(['haweswebsite@gmail.com' => 'HAWESwebsite notifier'])
       ->setTo(['eya.khechine@esprit.tn'])
    
       ->setBody($body)

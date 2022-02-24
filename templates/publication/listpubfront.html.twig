@@ -46,7 +46,7 @@
                          
                              <li><a class="dropdown-item" href={{('addpub')}}>Ajouter une publication </a></li>
                             <li><div class="dropdown-divider"></div></li>
-                            <li><a class="dropdown-item" href={{('acceuil')}}> consulter le forum</a></li>
+                            <li><a class="dropdown-item" href={{('listpubfront')}}> consulter le forum</a></li>
                             <li><div class="dropdown-divider"></div></li>
                             
                         </ul>
@@ -97,6 +97,9 @@
 
             <div class="my-3">
               <a class="btn" href="{{path('addcom',{'id':p.id})}}" >ajouter commentaire</a>
+              {%if p.idClient.id==2%}
+               <a class="btn" href="{{path('deletepub',{'id':p.id})}}" >supprimer votre publication</a>
+               {%endif%}
               <a class="btn" href="{{path('listcom',{'id':p.id})}}" >consulter les commentaires de cette publication</a>
             </div>
           </div>

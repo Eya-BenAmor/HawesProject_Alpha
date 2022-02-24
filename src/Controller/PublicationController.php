@@ -20,6 +20,7 @@ use App\Notifications\NouveauPublicationNotification;
 use PHPMailer\PHPMailer\PHPMailer;
 use Swift_SmtpTransport;
 use Swift_Message;
+use Swift_Mailer;
 
 require_once 'C:\Users\EYA\Desktop\HawesProject_Alpha\vendor\autoload.php';
 
@@ -204,7 +205,7 @@ return $this->redirectToRoute('listpub');
       $em->remove($publication);
       $em->flush(); 
 
-        return $this->redirectToRoute('listpub');
+        return $this->redirectToRoute('listpubfront');
        
     }
 
