@@ -10,12 +10,33 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * @Route("/document")
  */
 class DocumentController extends AbstractController
 {
+     /**
+     * @Route("/view/{id}", name="view")
+     */
+    public function detaille(string $id)
+    { 
+      //  $rep=$this->getDoctrine()->getRepository(Document::class);
+       // $doc =$rep-> find($id);
+       // $file = $doc->getLiendoc();
+       $entityManager = $this->getDoctrine->getEntityManager();
+        $query = $entityManager->createQuery('SELECT liendoc FROM App\Entity\Formation f 
+        inner join App\Entity\Document d ON f.id=d.id_formation   ');
+        $query->getResult();
+        
+       
+        return $this->file($query, 'file', ResponseHeaderBag::DISPOSITION_INLINE);
+
+    }
+
+   
     /**
      * @Route("/", name="document_index", methods={"GET"})
      */
@@ -90,4 +111,9 @@ class DocumentController extends AbstractController
 
         return $this->redirectToRoute('document_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+  
+
+
 }

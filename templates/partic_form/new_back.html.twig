@@ -1,0 +1,12 @@
+{% extends 'base-back.html.twig' %}
+
+
+{% block title %}New Document{% endblock %}
+
+{% block body %}
+    <h1>Create new Foma_Participant</h1>
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+    {{ include('partic_form/_form.html.twig') }}
+
+    <a href="{{ path('partic_form_index') }}" >back to list</a>
+{% endblock %}

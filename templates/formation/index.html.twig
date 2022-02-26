@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Formation index</h1>
 
-    <table class="table">
+    <table class="responstable">
         <thead>
             <tr>
                 <th>Id</th>
@@ -29,8 +29,9 @@
                 <td>{{ formation.plan }}</td>
                 <td>{{ formation.date }}</td>
                 <td>
-                    <a href="{{ path('formation_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('formation_edit', {'id': formation.id}) }}">edit</a>
+                    
+                    <a href="{{ path('formation_edit', {'id': formation.id}) }}" class="btn btn-light">edit</a>
+                    <a href="{{ path('formation_delete', {'id': formation.id}) }}" class="btn btn-danger">delete</a>
                 </td>
             </tr>
         {% else %}
@@ -40,6 +41,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('formation_new') }}">Create new</a>
+    <div>
+    <a href="{{ path('formation_new') }}" class="btn btn-success">New</a>
+    </div>
 {% endblock %}

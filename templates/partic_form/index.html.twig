@@ -1,0 +1,49 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}ParticForm index{% endblock %}
+
+{% block body %}
+    <h1>ParticForm index</h1>
+
+    <table class="responstable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Age</th>
+                
+                <th>Exp</th>
+                <th>domaine_for</th>
+                <th>ass_form</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partic_form in partic_forms %}
+            <tr>
+                <td>{{ partic_form.id }}</td>
+                <td>{{ partic_form.nom }}</td>
+                <td>{{ partic_form.prenom }}</td>
+                <td>{{ partic_form.age }}</td>
+               
+                <td>{{ partic_form.exp }}</td>
+                <td>{{ partic_form.soDomaine }}</td>
+                <td>{{ partic_form.soAss }}</td>
+                <td>
+             
+                    <a href="{{ path('partic_form_edit', {'id': partic_form.id}) }}" class="btn btn-light">edit</a>
+                    <a href="{{ path('partic_form_delete', {'id': partic_form.id}) }}"class="btn btn-danger" >delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<div>
+    <a href="{{ path('new_back') }}"  class="btn btn-success">New </a>
+    </div>
+{% endblock %}

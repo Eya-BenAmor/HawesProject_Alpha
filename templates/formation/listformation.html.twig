@@ -1,0 +1,188 @@
+{% extends 'base-front.html.twig' %}
+
+
+ 
+{% block css %}
+    <!-- Styles -->
+    <link href="{{ asset('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/fontawesome-all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/aos.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/swiper.css') }}" rel="stylesheet">
+     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
+   
+  
+
+    <!-- Favicon -->
+    <link rel="icon" "{{ asset('front/assets/images/.png') }}">
+    {% endblock  %}
+
+     {% block menu %}
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="front/assets/images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text"  href={{path('indexFront')}}>Hawes</a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href={{path('listeFront')}}>Home</a>
+                    </li>
+                   
+                   <li class="nav-item dropdown">
+                       <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Formation</a>
+                        
+                      
+                         
+                        
+                    </li>
+                    
+                
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+                       
+{% endblock  %}
+{% block index %}
+
+
+ <section class="home py-5 d-flex align-items-center" id="header">
+        <div class="container text-light py-5"  data-aos="fade-right"> 
+            <h1 class="headline">Vous-vouvez aussi s'iscrire a une <span class="home_text">Formation</span><br> </h1>
+            <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+           
+        </div> <!-- end of container -->
+    </section> <!-- end of home -->
+
+
+  <div class="location text-light py-5"">
+ 
+        <div class="container">
+      
+            <div class="row">
+ 
+                <div class="text-center w-lg-75 m-auto pb-4">
+                    <p>Hawes</p>
+                    <h2 class="py-2">Choisissez une Formation</h2>
+                    <p class="para-light">et S'inscrire maintenant</p>
+                </div>
+            </div> <!-- end of row -->
+            
+             <div class="row p-2" data-aos="zoom-in">
+            
+                <div class="col-lg-12">
+ 
+                    <!-- Card Slider -->
+                    <div class="slider-container">
+                        <div class="swiper-container card-slider">
+                            <div class="swiper-wrapper">
+                               
+                                {%for r in form %}
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                 
+                                    <div class="testimonial-card p-4">
+                                    <H3> {{r.nomform}} </H3>
+                                     <table >
+                                       <tr>
+                                       
+   
+    
+
+     </tr>
+      <tr>
+    <td> Dureé: </td>
+    <td> {{r.duree}}  </td>
+     </tr>
+     
+      <tr>
+    <td>Date: </td>
+    <td> {{r.date|date('d-m-Y')}}  </td>
+     </tr>
+     <tr>
+    <td>Equipe: </td>
+    <td> {{r.nomeq}}  </td>
+    
+  </tr>
+  </table> 
+    <td>Domaine: </td>
+    <p> {{r.domaine}}  </p>
+    
+     
+    
+  
+  
+  
+ 
+   
+  <div class="my-3">
+                            <a class="btn" href="{{ path('info', {'id': r.id}) }}" >Détaille</a>
+                        </div>
+                                      
+                                    </div>
+                                </div>
+                                <!-- end of slide -->
+                               
+         {% endfor %}
+
+                            </div> <!-- end of swiper-wrapper -->
+        
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <!-- end of add arrows -->
+        
+                        </div> <!-- end of swiper-container -->
+                    </div> <!-- end of slider-container -->
+                    <!-- end of card slider -->
+ 
+                </div> <!-- end of col -->
+                
+            </div> <!-- end of row -->
+           
+        </div> <!-- end of container -->
+    </div> <!-- end of testimonials -->
+    
+ 
+    
+  
+
+
+
+
+{% endblock  %}
+{% block footer  %}
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light" >
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>Equipe Alpha 2022</p><br>
+               
+            </div>
+           
+        </div> <!-- end of container -->
+    </div> <!-- end of bottom -->
+ {% endblock  %}
+
+    {% block js %}
+    <!-- Scripts -->
+    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script><!-- Bootstrap framework -->
+    <script src="{{ asset('front/js/purecounter.min.js') }}"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="{{ asset('front/js/swiper.min.js') }}"></script><!-- Swiper for image and text sliders -->
+    <script src="{{ asset('front/js/aos.js') }}"></script><!-- AOS on Animation Scroll -->
+    <script src="{{ asset('front/js/script.js') }}"></script>  <!-- Custom scripts -->
+   
+    {% endblock  %}
+
+
+   

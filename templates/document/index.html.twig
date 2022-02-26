@@ -5,13 +5,14 @@
 {% block body %}
     <h1>Document index</h1>
 
-    <table class="table">
+    <table class="responstable">
         <thead>
             <tr>
                 <th>ID de document</th>
                 <th>Type de document</th>
                 <th>Nombre depage</th>
                 <th>Lien de document</th>
+                <th>id formation</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,9 +23,11 @@
                 <td>{{ document.typedoc }}</td>
                 <td>{{ document.nombrepage }}</td>
                 <td>{{ document.liendoc }}</td>
+                 <td>{{ document.getIdFormation() }}</td>
                 <td>
-                    <a href="{{ path('document_show', {'id': document.id}) }}">show</a>
-                    <a href="{{ path('document_edit', {'id': document.id}) }}">edit</a>
+                
+                   <a href="{{ path('document_edit', {'id': document.id}) }}"  class="btn btn-light" >edit</a>
+                    <a href="{{ path('document_delete', {'id': document.id}) }}" class="btn btn-danger">delete</a>
                 </td>
             </tr>
         {% else %}
@@ -34,6 +37,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('document_new') }}">Create new</a>
+    <div>
+    <a href="{{ path('document_new') }}" class="btn btn-success">New</a>
+    </div>
 {% endblock %}

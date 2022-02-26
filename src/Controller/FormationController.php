@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FormationController extends AbstractController
 {
+
     /**
      * @Route("/", name="formation_index", methods={"GET"})
      */
@@ -25,6 +26,51 @@ class FormationController extends AbstractController
             'formations' => $formationRepository->findAll(),
         ]);
     }
+
+    /**
+     * @Route("/listeFront", name="listeFront")
+     */
+    public function listerFront(): Response
+    { 
+        $rep=$this->getDoctrine()->getRepository(Formation::class);
+        
+        $form =$rep-> findAll();
+      
+        return $this->render('formation/listformation.html.twig', [
+            'form' => $form,
+           
+        ]);
+    }
+
+
+    /**
+     * @Route("/info/{id}", name="info")
+     */
+    public function detaille(string $id)
+    { 
+        $rep=$this->getDoctrine()->getRepository(Formation::class);
+        $form =$rep-> find($id);
+        echo "<script>console.log('Debug Objects: " . $form . "' );</script>";
+
+        return $this->render('formation/detaille.html.twig', [
+            'form' => $form,
+           
+        ]);
+
+    }
+
+
+    /**
+     * @Route("/indexFront", name="indexFront")
+     */
+    public function indexFront(): Response
+    {
+        return $this->render('formation/indexFront.html.twig', [
+            'controller_name' => 'FormationController',
+        ]);
+    }
+
+
 
     /**
      * @Route("/new", name="formation_new", methods={"GET", "POST"})

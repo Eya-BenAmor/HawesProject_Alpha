@@ -1,12 +1,16 @@
 {% extends 'base-back.html.twig' %}
-{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
 
 {% block title %}New Document{% endblock %}
-
+<div>
+ <a href="{{ path('document_index') }}" >back to list</a>
+ </div>
 {% block body %}
     <h1>Create new Document</h1>
-
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
     {{ include('document/_form.html.twig') }}
-
-    <a href="{{ path('document_index') }}">back to list</a>
+   
+   
+  
 {% endblock %}
+

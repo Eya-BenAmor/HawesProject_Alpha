@@ -55,7 +55,7 @@ class Formation
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="nom de formation est obligatoire  ")
+     * @Assert\NotBlank(message="plan de formation est obligatoire  ")
      */
     private $plan;
 

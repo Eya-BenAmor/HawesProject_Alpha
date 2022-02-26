@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ParticForm{% endblock %}
+
+{% block body %}
+    <h1>ParticForm</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ partic_form.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ partic_form.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ partic_form.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ partic_form.age }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ partic_form.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Exp</th>
+                <td>{{ partic_form.exp }}</td>
+            </tr>
+            <tr>
+                <th>So_domaine</th>
+                <td>{{ partic_form.soDomaine }}</td>
+            </tr>
+            <tr>
+                <th>So_ass</th>
+                <td>{{ partic_form.soAss }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('partic_form_index') }}">back to list</a>
+
+    <a href="{{ path('partic_form_edit', {'id': partic_form.id}) }}">edit</a>
+
+    {{ include('partic_form/_delete_form.html.twig') }}
+{% endblock %}
