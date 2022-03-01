@@ -1,0 +1,30 @@
+{% block body %}
+
+        <h2>Admins list</h2>
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Cin</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for admin in admins %}
+            <tr>
+                <td>{{ admin.id }}</td>
+                <td>{{ admin.nom }}</td>
+                <td>{{ admin.prenom }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.cin }}</td>
+                
+            </tr>
+        
+        {% endfor %}
+        </tbody>
+        
+    </table>
+{% endblock %}

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass=AdminRepository::class)
  */
@@ -75,6 +76,19 @@ class Admin
      * message="Vous n'avez pas saisi le même mot de passe !" )
      */
     private $confirm_mdp;
+
+    protected $captchaCode;
+    
+    public function getCaptchaCode()
+    {
+      return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+      $this->captchaCode = $captchaCode;
+    }
+
 
     public function getId(): ?int
     {

@@ -18,7 +18,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href={{asset("back_office/assets/css/style.css")}}>
     <!-- End layout styles -->
-    <link rel="shortcut icon" href={{asset("back_office/assets/images/favicon.png")}} />
+    <link rel="shortcut icon" href={{asset("back_office/assets/images/haweslogo.png")}} />
   </head>
   {% endblock %}
     {% block body %}
@@ -63,8 +63,10 @@
                   <div class="mt-3">
                     <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN UP</a>
                   </div>
+                  {% block login %}
                   <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.html" class="text-primary">Login</a>
                   </div>
+                  {% endblock %}
                 </form>
               </div>
             </div>

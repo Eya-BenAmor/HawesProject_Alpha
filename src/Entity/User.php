@@ -55,15 +55,27 @@ class User
      *      minMessage = "Votre mdp doit faire au moins {{ limit }} caractères",
      *      maxMessage = "Votre mdp ne peut pas être plus long que {{ limit }} caractères"
      * )
-     */
+     */ 
     private $mdp;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\EqualTo(propertyPath = "password",
+     * @Assert\EqualTo(propertyPath = "mdp",
      * message="Vous n'avez pas saisi le même mot de passe !" )
      */
     private $confrim_mdp;
+
+    protected $captchaCode;
+    
+    public function getCaptchaCode()
+    {
+      return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+      $this->captchaCode = $captchaCode;
+    }
 
     public function getId(): ?int
     {

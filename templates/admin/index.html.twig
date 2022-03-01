@@ -5,8 +5,8 @@
 {% block nav %}
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href={{asset("base-back.html.twig")}}><img src={{asset("../../public/back_office/assets/images/logo.svg")}} alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href={{asset("base-back.html.twig")}}><img src={{asset("../..public/back_officeassets/images/logo-mini.svg")}} alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href={{asset("/admin")}}>Hawes</a>
+          <a class="navbar-brand brand-logo-mini" href={{asset("/admin")}}><img src={{asset("back_office/assets/images/haweslogo.png")}} alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -18,7 +18,7 @@
                 <div class="input-group-prepend bg-transparent">
                   <i class="input-group-text border-0 mdi mdi-magnify"></i>
                 </div>
-                <input type="text" class="form-control bg-transparent border-0" placeholder="Search products">
+                <input type="text" class="form-control bg-transparent border-0" placeholder="Search admins">
               </div>
             </form>
           </div>
@@ -26,10 +26,10 @@
             <li class="nav-item  dropdown d-none d-md-block">
               <a class="nav-link dropdown-toggle" id="reportDropdown" href="#" data-toggle="dropdown" aria-expanded="false"> Reports </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="reportDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ path('admin_pdf') }}">
                   <i class="mdi mdi-file-pdf mr-2"></i>PDF </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{path ('admin_xlsx')}}">
                   <i class="mdi mdi-file-excel mr-2"></i>Excel </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">
@@ -288,8 +288,8 @@
               <div class="collapse" id="auth">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href={{asset("public/back_office/pages/samples/blank-page.html")}}> Blank Page </a></li>
-                  <li class="nav-item"> <a class="nav-link" href={{asset("public/back_office/pages/samples/login.html")}}> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href={{ path('admin_new') }}> Register </a></li>
+                  <li class="nav-item"> <a class="nav-link" href={{path ('app_login') }}> Login </a></li>
+                  <li class="nav-item"> <a class="nav-link" href={{path ('admin_new') }}> Register </a></li>
                   <li class="nav-item"> <a class="nav-link" href={{asset("public/back_office/pages/samples/error-404.html")}}> 404 </a></li>
                   <li class="nav-item"> <a class="nav-link" href={{asset("public/back_office/pages/samples/error-500.html")}}> 500 </a></li>
                 </ul>
@@ -377,10 +377,17 @@
             </tr>
         {% endfor %}
         </tbody>
+        
     </table>
 
-    <a href="{{ path('admin_new') }}">Create new</a>
-{% endblock %}
+    <!-- <a href="{{ path('admin_new') }}">Create new</a> -->
+    <!-- <a href="{{ path('admin_pdf') }}">PDF</a> -->
+
+        <div class="navigation">
+            {{ knp_pagination_render(admins) }}
+        </div>
+        {% endblock %}
+
 </div>
           </div>
           <!-- content-wrapper ends -->
