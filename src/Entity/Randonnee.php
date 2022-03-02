@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=RandonneeRepository::class)
  
@@ -30,7 +31,7 @@ class Randonnee
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide"
      * )
-     
+     * @Groups("post:read")
      */
     private $nomRando;
 
@@ -38,6 +39,7 @@ class Randonnee
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide")
+     * @Groups("post:read")
      
      */
     private $destination;
@@ -45,6 +47,7 @@ class Randonnee
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "champs ne doit pas etre vide")
+     * @Groups("post:read")
      */
     private $description;
 
@@ -52,6 +55,7 @@ class Randonnee
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide")
+     
      */
     private $categorieRando;
 
@@ -70,6 +74,7 @@ class Randonnee
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
      *      message = "champs ne doit pas etre vide")
+     * @Groups("post:read")
      */
     private $dureeRando;
 
@@ -98,6 +103,11 @@ class Randonnee
      * @ORM\Column(type="float")
      */
     private $note;
+
+    /**
+     * @ORM\Column(type="string", length=7, nullable=true)
+     */
+    private $couleur;
 
     public function __construct()
     {
@@ -243,6 +253,18 @@ class Randonnee
     public function setNote(float $note): self
     {
         $this->note = $note;
+
+        return $this;
+    }
+
+    public function getCouleur(): ?string
+    {
+        return $this->couleur;
+    }
+
+    public function setCouleur(?string $couleur): self
+    {
+        $this->couleur = $couleur;
 
         return $this;
     }

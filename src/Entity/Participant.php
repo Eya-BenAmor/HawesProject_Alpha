@@ -35,7 +35,7 @@ class Participant
       * @Assert\Regex(
      *     pattern     = " /^\+216\d{8}$/"
      
-    *      ,message = "Numero invalide un numéro doit commencer par  +216 et contenir 7 chiffres aprés "
+    *      ,message = "Numero invalide un numéro doit commencer par  +216 et contenir 8 chiffres aprés "
      * )
    
      */
@@ -58,11 +58,7 @@ class Participant
      */
     private $classe;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="participant")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $client;
+    
 
     /**
      * @ORM\ManyToOne(targetEntity=Randonnee::class, inversedBy="participant")
@@ -123,17 +119,7 @@ class Participant
         return $this;
     }
 
-    public function getClient(): ?Client
-    {
-        return $this->client;
-    }
-
-    public function setClient(?Client $client): self
-    {
-        $this->client = $client;
-
-        return $this;
-    }
+   
 
     public function getRandonnee(): ?Randonnee
     {
@@ -143,6 +129,35 @@ class Participant
     public function setRandonnee(?Randonnee $randonnee): self
     {
         $this->randonnee = $randonnee;
+
+        return $this;
+    }
+    protected $captchaCode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participant")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+    
+    public function getCaptchaCode()
+    {
+      return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+      $this->captchaCode = $captchaCode;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

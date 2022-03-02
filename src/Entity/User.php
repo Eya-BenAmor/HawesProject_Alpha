@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ClientRepository::class)
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class Client
+class User
 {
     /**
      * @ORM\Id
@@ -30,14 +30,24 @@ class Client
     private $prenom;
 
     /**
-     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="client", orphanRemoval=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $participant;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private $mdp;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $confrim_mdp;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $participant;
 
     public function __construct()
     {
@@ -73,6 +83,42 @@ class Client
         return $this;
     }
 
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getMdp(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function setMdp(string $mdp): self
+    {
+        $this->mdp = $mdp;
+
+        return $this;
+    }
+
+    public function getConfrimMdp(): ?string
+    {
+        return $this->confrim_mdp;
+    }
+
+    public function setConfrimMdp(string $confrim_mdp): self
+    {
+        $this->confrim_mdp = $confrim_mdp;
+
+        return $this;
+    }
+
     /**
      * @return Collection|Participant[]
      */
@@ -85,7 +131,7 @@ class Client
     {
         if (!$this->participant->contains($participant)) {
             $this->participant[] = $participant;
-            $participant->setClient($this);
+            $participant->setUser($this);
         }
 
         return $this;
@@ -95,22 +141,10 @@ class Client
     {
         if ($this->participant->removeElement($participant)) {
             // set the owning side to null (unless already changed)
-            if ($participant->getClient() === $this) {
-                $participant->setClient(null);
+            if ($participant->getUser() === $this) {
+                $participant->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
