@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="back/assets/css/style.css">
     <link rel="shortcut icon" href="back/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+   
+
+
 
     {% endblock %}
     {%block image %}
@@ -22,6 +25,10 @@
 
 
  <div class="main-panel">
+ 
+   
+
+
           <div class="content-wrapper">
    
             <div class="row">
@@ -45,8 +52,8 @@
                 </div>
                 
                 </div>  
-
-<table class="responstable">
+ 
+<table class="responstable" id="rowPub" >
   
   <tr>
     <th>Nom randonnee</th>
@@ -55,29 +62,45 @@
     <th> Catégorie</th>
     <th>Date</th>
     <th>Duree</th>
+    <th>Prix</th>
+    <th>Note</th>
     <th>Action</th>
   </tr>
+   
   {%for r in rando %}
+    
   <tr>
-    <td> {{r.nomRando}} </td>
+    <td>  {{r.nomRando}} </td>
 <td> {{r.destination}}  </td>
 <td> {{r.description}}  </td>
 <td> {{r.categorieRando}}  </td>
 <td> {{r.dateRando|date('d-m-Y')}}  </td>
 <td> {{r.dureeRando}}  </td>
-<td> <a href="{{path('modifierRando',{'id':r.id})}}" > Modifier</a>
-<a href="{{path('supprimerRando',{'id':r.id})}}" > Supprimer</a> </td>
+<td> {{r.prix}}  </td>
+<td> {{r.note}}  </td>
+<td><a href="{{path('modifierRando',{'id':r.id})}}"  class="fa fa-edit" > </a>
+<a href="{{path('supprimerRando',{'id':r.id})}}"  class="fa fa-trash" > </a>
+
+<a href="{{path('listerpnr',{'id':r.id})}}"  class="fa fa-search" ></a> 
+<a href="{{path('pdf',{'id':r.id})}}"  class="fa fa-file-pdf-o" ></a> </td>
   </tr>
   
   
   {% endfor %}
+ 
+<div class="navigation d-block p-2 ">
+         {% do rando.setPageRange(1) %} {# Le nombre de numero de page qui s'affiche sur une page #}
+        {{ knp_pagination_render(rando, 'pagination/test.html.twig') }}
+      </div> 
+  
+ 
 </table>    
 </div>
            </div>          
 
 
 
-
+  
 
 {% endblock %}
 
@@ -90,5 +113,7 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="back/assets/js/dashboard.js"></script>
-    
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+  
+
     {% endblock %}
