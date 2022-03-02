@@ -1,0 +1,29 @@
+{% block body %}
+
+        <h2>Users list</h2>
+
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Cin</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.email }}</td>
+                
+            </tr>
+        
+        {% endfor %}
+        </tbody>
+        
+    </table>
+{% endblock %}

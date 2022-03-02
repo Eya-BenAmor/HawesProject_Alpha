@@ -19,6 +19,8 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+
 
 /**
  * @Route("/admin")
@@ -109,48 +111,44 @@ class AdminController extends AbstractController
     }
 
     /**
-    *@Route("/",name="admin_list")
-    */
-  public function search(Request $request)
-  {
-    $propertySearch = new PropertySearch();
-    $forms = $this->createForm(PropertySearchType::class,$propertySearch);
-    $forms->handleRequest($request);
-   //initialement le tableau des articles est vide, 
-   //c.a.d on affiche les articles que lorsque l'utilisateur clique sur le bouton rechercher
-    $admins= [];
-    
-   if($forms->isSubmitted() && $forms->isValid()) {
-   //on récupère le nom d'article tapé dans le formulaire
-    $nomS = $propertySearch->getNomS();   
-    if ($nomS!="") 
-      //si on a fourni un nom d'article on affiche tous les articles ayant ce nom
-      $admins= $this->getDoctrine()->getRepository(Admin::class)->findBy(['nomS' => $nomS] );
-    else   
-      //si si aucun nom n'est fourni on affiche tous les articles
-      $admins= $this->getDoctrine()->getRepository(Admin::class)->findAll();
-   }
-    return  $this->render('admin/index.html.twig',[ 'forms' =>$forms->createView(), 'admins' => $admins]);  
-  }
+     * @Route("/search", name="ajax_search")
+     */
+public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $nom = $request->get('q');
+        $admin =  $em->getRepository(Admin::class)->findEntitiesByNom($nom);
+        if(!$admin ) {
+            $result['admin ']['error'] = "admin introuvable :( ";
+        } else {
+            $result['admin '] = $this->getRealEntities($admin);
+        }
+        return new Response(json_encode($result));
+    }
+    public function getRealEntities($admin){
+        foreach ($admin  as $admin){
+            $realEntities[$admin ->getId()] = [$admin->getNom()];
 
+        }
+        return $realEntities;
+    }
 
     /**
-     * @Route("/login", name="app_login")
+     * @Route("/logina", name="ad_login")
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        
-        return $this->render('admin/login.html.twig');
-    }
+        // if ($this->getUser()) {
+        //     return $this->redirectToRoute('target_path');
+        // }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
-    public function logout(): void
-    {
-       # throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
-    }
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
 
+        return $this->render('admin/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
 
     /**
      * @Route("/pdf", name="admin_pdf", methods={"GET"})
