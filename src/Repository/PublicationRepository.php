@@ -5,6 +5,8 @@ use App\Repository\PublicationRepository;
 use App\Entity\Publication;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query;
 
 /**
  * @method Publication|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +20,45 @@ class PublicationRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Publication::class);
     }
+
+
+
+
+
+ 
+
+    public function ListPublicationById($id){
+return $this->createQueryBuilder('p')
+
+->where('p.id=:id')
+->setParameter('id',$id)
+->getQuery()
+->getResult();
+
+
+}
+
+   public function findEntitiesByNom($nom){
+return $this->createQueryBuilder('p')
+
+->where('p.nom=:nom')
+->setParameter('nom',$nom)
+->getQuery()
+->getResult();
+
+
+}
+   public function findEntitiesByString($str){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p
+                FROM Publication p
+                WHERE p.nom LIKE :str'
+            )
+            ->setParameter('str', '%'.$str.'%')
+            ->getResult();
+    }
+
 
     // /**
     //  * @return Publication[] Returns an array of Publication objects

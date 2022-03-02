@@ -13,6 +13,7 @@ use App\Form\CommentaireType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Notifications\NouveauPublicationNotification;
+use App\Repository\PublicationRepository ;
 
 class CommentaireController extends AbstractController
 {
@@ -32,11 +33,21 @@ class CommentaireController extends AbstractController
     public function listcom($id): Response
     {
         $rep=$this->getDoctrine()->getRepository(commentaire::class);
-
+        $repPublication=$this->getDoctrine()->getRepository(publication::class);
         $commentaire =$rep->ListCommentaireByPublication($id);
+        $publication = $repPublication->ListPublicationById($id);
+       
+        
+           $value = $publication[0]->getViews();
+            $value = $value + 1 ;
+            $publication[0]->setViews($value);
+            $em=$this->getDoctrine()->getManager();
+            $em->flush();
 
         return $this->render('commentaire/listc.html.twig', [
             'commentaire' => $commentaire,
+            'publication' =>$publication[0]
+
         ]);
     }
 

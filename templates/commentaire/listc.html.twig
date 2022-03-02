@@ -63,14 +63,24 @@
 
  <section class="home py-5 d-flex align-items-center" id="header">
         <div class="container text-light py-5"  data-aos="fade-right"> 
-            <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span><br>Pour vous</h1>
-            <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+            <h1 style="color:grey !important;"class="headline">{{publication.nom}}</h1>
+            <h6 style="color:grey !important;">nombre de  vues {{publication.views}}</h6>
+              <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+
+            <img
+            class="img-fluid"
+              
+              src="../{{publication.photo}}"  alt={{publication.photo}}
+            />
+            </div>
+            <p  style="color:white !important;" class="para para-light py-3">{{publication.description}} </p>
            
         </div> <!-- end of container -->
     </section> <!-- end of home -->
 
 
   
+
  
     <!-- Testimonials -->
     <div class="slider-1 testimonial text-light d-flex align-items-center">
@@ -80,6 +90,8 @@
           <div class="text-center w-lg-75 m-auto pb-4">
             
             <h2 class="py-2"> Tous les commentaires</h2>
+          
+            
            
           </div>
           </div>
@@ -97,7 +109,7 @@
          <!-- Slide -->
          
            {%for  c in commentaire %}
-
+  
                   <div class="swiper-slide">  
                   
                           
@@ -105,14 +117,14 @@
                            <div class="testimonial-card p-4"> 
                                <p>
                                 {{c.contenu}}
+                            
                                 </p>
 
                                    <div class="d-flex pt-4">
                          <div>
                           <img
                             class="avatar"
-                            src="../front/assets/images/eya.jpg"
-                            
+                            src="../front/assets/images/eya.jpg" 
                           />
                         </div>
                                     <div class="ms-3 pt-2">

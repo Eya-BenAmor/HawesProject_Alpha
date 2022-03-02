@@ -13,6 +13,20 @@
     <link rel="stylesheet" href="../back/assets/css/style.css">
     <link rel="shortcut icon" href="../ack/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     {% endblock %}
     {%block image %}
@@ -24,6 +38,81 @@
  <div class="main-panel">
           <div class="content-wrapper">
    
+
+
+ 
+
+
+<h2> rechercher une publication !!</h2>
+
+        <div class="sidebar-search">
+      <div class="input-group custom-search-form">
+          <input type="text" id="search" class="form-control" placeholder="rechercher">
+      </div>
+      <!-- /input-group -->
+  </div>
+  <ul class="nav" id="side-menu">
+      <li>
+         
+          <ul class="nav nav-second-level" id="entitiesNav">
+          </ul>
+      </li>
+  </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 3;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_search') }}",
+                    data: {
+                        'q' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+ 
+ 
+                                        if (id != 'error') {
+                                            console.log(id)
+window.location.replace("http://127.0.0.1:8000/listpubb/"+id)
+                                        }
+                                        
+                                        else {
+                                            entitySelector.append('<li style="color:red;">'+value+'</li>');
+                                        }
+                                    
+                                });
+                            });
+                        }
+                     }
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
             <div class="row">
               <div class="col-md-12">
                 <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
@@ -42,6 +131,9 @@
                 </div>
                 
                 </div>  
+
+
+
 <table class="responstable">
   
   <tr>
@@ -51,12 +143,17 @@
    <th> id_Client </th>
   <th>Action</th>
   </tr>
+
+
+
+
   {%for  p in publication %}
   <tr>
  <td> {{p.nom}}  </td>
 <td> {{p.description}}  </td>
 <td> {{p.photo}}  </td>
 <td> {{p.idclient.id}}  </td>
+
 
 <td> <a href="{{path('updatepub',{'id':p.id})}}" > Modifier</a>
 

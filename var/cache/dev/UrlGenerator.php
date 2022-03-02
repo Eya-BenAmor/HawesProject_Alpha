@@ -27,4 +27,10 @@ return [
     'addpub' => [[], ['_controller' => 'App\\Controller\\PublicationController::add'], [], [['text', '/addpub']], [], []],
     'updatepub' => [['id'], ['_controller' => 'App\\Controller\\PublicationController::update'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/updatepub']], [], []],
     'deletepub' => [['id'], ['_controller' => 'App\\Controller\\PublicationController::deletepub'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/deletepub']], [], []],
+    'listpubb' => [['id'], ['_controller' => 'App\\Controller\\PublicationController::listpubb'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/listpubb']], [], []],
+    'ajax_search' => [[], ['_controller' => 'App\\Controller\\PublicationController::searchAction'], [], [['text', '/search']], [], []],
+    'listpubjson' => [[], ['_controller' => 'App\\Controller\\PublicationController::listjson'], [], [['text', '/listpubjson']], [], []],
+    'addpubjson' => [[], ['_controller' => 'App\\Controller\\PublicationController::addpubjson'], [], [['text', '/addpubjson']], [], []],
+    'updatepubjson' => [['id'], ['_controller' => 'App\\Controller\\PublicationController::updatepubjson'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/updatepubjson']], [], []],
+    'deletepubjson' => [['id'], ['_controller' => 'App\\Controller\\PublicationController::deletepubjson'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/deletepubjson']], [], []],
 ];

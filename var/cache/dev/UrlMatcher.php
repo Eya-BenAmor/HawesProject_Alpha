@@ -19,6 +19,9 @@ return [
         '/listpubfront' => [[['_route' => 'listpubfront', '_controller' => 'App\\Controller\\PublicationController::listpubfront'], null, null, null, false, false, null]],
         '/listpub' => [[['_route' => 'listpub', '_controller' => 'App\\Controller\\PublicationController::list'], null, null, null, false, false, null]],
         '/addpub' => [[['_route' => 'addpub', '_controller' => 'App\\Controller\\PublicationController::add'], null, null, null, false, false, null]],
+        '/search' => [[['_route' => 'ajax_search', '_controller' => 'App\\Controller\\PublicationController::searchAction'], null, null, null, false, false, null]],
+        '/listpubjson' => [[['_route' => 'listpubjson', '_controller' => 'App\\Controller\\PublicationController::listjson'], null, null, null, false, false, null]],
+        '/addpubjson' => [[['_route' => 'addpubjson', '_controller' => 'App\\Controller\\PublicationController::addpubjson'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -37,15 +40,24 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/listcom/([^/]++)(*:186)'
-                .'|/addcom/([^/]++)(*:210)'
+                .'|/list(?'
+                    .'|com/([^/]++)(*:189)'
+                    .'|pubb/([^/]++)(*:210)'
+                .')'
+                .'|/addcom/([^/]++)(*:235)'
                 .'|/update(?'
-                    .'|com/([^/]++)(*:240)'
-                    .'|pub/([^/]++)(*:260)'
+                    .'|com/([^/]++)(*:265)'
+                    .'|pub(?'
+                        .'|/([^/]++)(*:288)'
+                        .'|json/([^/]++)(*:309)'
+                    .')'
                 .')'
                 .'|/delete(?'
-                    .'|com/([^/]++)(*:291)'
-                    .'|pub/([^/]++)(*:311)'
+                    .'|com/([^/]++)(*:341)'
+                    .'|pub(?'
+                        .'|/([^/]++)(*:364)'
+                        .'|json/([^/]++)(*:385)'
+                    .')'
                 .')'
             .')/?$}sD',
     ],
@@ -57,13 +69,16 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        186 => [[['_route' => 'listcom', '_controller' => 'App\\Controller\\CommentaireController::listcom'], ['id'], null, null, false, true, null]],
-        210 => [[['_route' => 'addcom', '_controller' => 'App\\Controller\\CommentaireController::add'], ['id'], null, null, false, true, null]],
-        240 => [[['_route' => 'updatecom', '_controller' => 'App\\Controller\\CommentaireController::update'], ['id'], null, null, false, true, null]],
-        260 => [[['_route' => 'updatepub', '_controller' => 'App\\Controller\\PublicationController::update'], ['id'], null, null, false, true, null]],
-        291 => [[['_route' => 'deletecom', '_controller' => 'App\\Controller\\CommentaireController::deletepub'], ['id'], null, null, false, true, null]],
-        311 => [
-            [['_route' => 'deletepub', '_controller' => 'App\\Controller\\PublicationController::deletepub'], ['id'], null, null, false, true, null],
+        189 => [[['_route' => 'listcom', '_controller' => 'App\\Controller\\CommentaireController::listcom'], ['id'], null, null, false, true, null]],
+        210 => [[['_route' => 'listpubb', '_controller' => 'App\\Controller\\PublicationController::listpubb'], ['id'], null, null, false, true, null]],
+        235 => [[['_route' => 'addcom', '_controller' => 'App\\Controller\\CommentaireController::add'], ['id'], null, null, false, true, null]],
+        265 => [[['_route' => 'updatecom', '_controller' => 'App\\Controller\\CommentaireController::update'], ['id'], null, null, false, true, null]],
+        288 => [[['_route' => 'updatepub', '_controller' => 'App\\Controller\\PublicationController::update'], ['id'], null, null, false, true, null]],
+        309 => [[['_route' => 'updatepubjson', '_controller' => 'App\\Controller\\PublicationController::updatepubjson'], ['id'], null, null, false, true, null]],
+        341 => [[['_route' => 'deletecom', '_controller' => 'App\\Controller\\CommentaireController::deletepub'], ['id'], null, null, false, true, null]],
+        364 => [[['_route' => 'deletepub', '_controller' => 'App\\Controller\\PublicationController::deletepub'], ['id'], null, null, false, true, null]],
+        385 => [
+            [['_route' => 'deletepubjson', '_controller' => 'App\\Controller\\PublicationController::deletepubjson'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

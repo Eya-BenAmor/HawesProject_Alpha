@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints\Image;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Notifications\NouveauPublicationNotification;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 
@@ -26,6 +27,7 @@ class Publication
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+    * @Groups("post:read")
      */
     private $id;
 
@@ -33,6 +35,7 @@ class Publication
       * @ORM\Column(type="string", length=50,nullable=false)
       * @Assert\Type(type="string")
       * @Assert\NotBlank (message="vous devez ajouter un nom")
+     * @Groups("post:read")
      */
     private $nom;
 
@@ -40,6 +43,7 @@ class Publication
      * @ORM\Column(type="string", length=255,nullable=false)
      * @Assert\Type(type="string")
      * @Assert\NotBlank (message="vous devez ajouter une description")
+     * @Groups("post:read")
      */
     private $description;
 
@@ -62,6 +66,11 @@ class Publication
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="publications")
      */
     private $idclient;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $views;
 
     public function __construct()
     {
@@ -149,6 +158,18 @@ class Publication
     public function setIdclient(?client $idclient): self
     {
         $this->idclient = $idclient;
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): self
+    {
+        $this->views = $views;
 
         return $this;
     }

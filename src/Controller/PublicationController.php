@@ -2,6 +2,13 @@
 
 namespace App\Controller;
 
+use Symfony\Bridge\Doctrine\Logger\DbalLogger;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -73,6 +80,9 @@ class PublicationController extends AbstractController
         ]);
     }
 
+
+    
+
 /**
      * @Route("/listpub", name="listpub")
      */
@@ -127,7 +137,9 @@ class PublicationController extends AbstractController
     $em=$this->getDoctrine()->getManager();
     $em->persist($publication);
     $em->flush();
+
      $this->notify_creation->notify();
+     
     return $this->redirectToRoute('listpubfront');
     }
     
@@ -224,6 +236,119 @@ public function __construct(NouveauPublicationNotification $notify_creation)
     $this->notify_creation = $notify_creation;
     
 }
+ /**
+     * @Route("/listpubb/{id}", name="listpubb")
+     */
+    public function listpubb($id): Response
+    {
+        $rep=$this->getDoctrine()->getRepository(publication::class);
+
+        $publication =$rep->ListPublicationById($id);
+
+        return $this->render('publication/listpubback.html.twig', [
+            'publication' => $publication,
+        ]);
+    }
+
+
+
+  /**
+   * @Route("/search", name="ajax_search")
+   */
+public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $nom = $request->get('q');
+        $publication =  $em->getRepository(publication::class)->findEntitiesByNom($nom);
+        if(!$publication ) {
+            $result['publication ']['error'] = "publication introuvable :( ";
+        } else {
+            $result['publication '] = $this->getRealEntities($publication );
+        }
+        return new Response(json_encode($result));
+    }
+    public function getRealEntities($publication ){
+        foreach ($publication  as $publication ){
+            $realEntities[$publication ->getId()] = [$publication->getNom()];
+
+        }
+        return $realEntities;
+    }
+
+    /**
+     * @Route("/listpubjson", name="listpubjson")
+     */
+    public function listjson(NormalizerInterface $Normalizer): Response
+
+    {$rep=$this->getDoctrine()->getRepository(publication::class);
+
+        $publication =$rep-> findAll();
+
+          $jsonContent=$Normalizer->normalize($publication,'json',['groups'=>'post:read']);
+
+        
+
+        return new Response (json_encode($jsonContent));
+    }
+    
+
+/**
+     * @Route("/addpubjson", name="addpubjson")
+     */
+    public function addpubjson(Request $request,NormalizerInterface $Normalizer): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $publication=new publication() ;
+        $publication->setNom($request->get('nom'));
+         $publication->setDescription($request->get('description'));
+          $publication->setPhoto($request->get('photo'));
+
+       $em->persist($publication);
+       $em->flush();
+$this->notify_creation->notify();
+    $jsonContent=$Normalizer->normalize($publication,'json',['groups'=>'post:read']);
+    return new Response (json_encode($jsonContent));
+       
+
+    }
+
+    /**
+     * @Route("/updatepubjson/{id}", name="updatepubjson")
+     */
+    public function updatepubjson(Request $request,NormalizerInterface $Normalizer,$id): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $publication=$em->getRepository(publication::class)->find($id);
+        $publication->setNom($request->get('nom'));
+         $publication->setDescription($request->get('description'));
+          $publication->setPhoto($request->get('photo'));
+
+       $em->flush();
+
+    $jsonContent=$Normalizer->normalize($publication,'json',['groups'=>'post:read']);
+    return new Response ("publication modifiée".json_encode($jsonContent));
+       
+
+    }
+
+
+    /**
+     * @Route("/deletepubjson/{id}", name="deletepubjson")
+     */
+    public function deletepubjson(Request $request,NormalizerInterface $Normalizer,$id): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $publication=$em->getRepository(publication::class)->find($id);
+     $em->remove($publication);
+       $em->flush();
+
+    $jsonContent=$Normalizer->normalize($publication,'json',['groups'=>'post:read']);
+    return new Response ("publication supprimée".json_encode($jsonContent));
+       
+
+    }
+
+
 
 
     

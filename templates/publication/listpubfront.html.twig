@@ -92,13 +92,18 @@
             </h1>
             <p class="py-2 para-light">
             {{p.description}}
+          
             </p>
            
 
             <div class="my-3">
               <a class="btn" href="{{path('addcom',{'id':p.id})}}" >ajouter commentaire</a>
-              {%if p.idClient.id==2%}
+
+              {%if p.idClient.id== 1 %}
+
                <a class="btn" href="{{path('deletepub',{'id':p.id})}}" >supprimer votre publication</a>
+
+
                {%endif%}
               <a class="btn" href="{{path('listcom',{'id':p.id})}}" >consulter les commentaires de cette publication</a>
             </div>
@@ -106,8 +111,7 @@
           <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
             <img
               class="img-fluid"
-              src={{p.photo}}  alt="/uploads/photos"+{{p.photo}}
-              alt="about"
+              src={{p.photo}} 
             />
           </div>
 

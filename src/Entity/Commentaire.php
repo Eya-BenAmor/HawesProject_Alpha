@@ -38,6 +38,7 @@ class Commentaire
      */
     private $idclient;
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,4 +79,5 @@ class Commentaire
 
         return $this;
     }
+
 }
