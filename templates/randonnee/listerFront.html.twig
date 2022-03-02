@@ -163,7 +163,68 @@
                   
                     
                      
-    
+     {% if r.note ==0  %}  
+                      <div class="stars">
+           
+           
+               </div>
+
+   
+                     {% elseif r.note ==1 or r.note ==1.5 %}  
+                      <div class="stars">
+            <i class="las la-star" data-value="1"></i>
+           
+               </div>
+                {% elseif r.note ==2 or r.note ==2.5 %}  
+                      <div class="stars">
+            <i class="las la-star" data-value="1"></i>
+              <i class="las la-star" data-value="1"></i>
+           
+               </div>
+                {% elseif r.note ==3 or r.note==3.5 %}  
+                      <div class="stars">
+            <i class="las la-star" data-value="1"></i>
+              <i class="las la-star" data-value="1"></i>
+                <i class="las la-star" data-value="1"></i>
+           
+               </div>
+                {% elseif r.note==4 or r.note ==4.5%}  
+                      <div class="stars">
+            <i class="las la-star" data-value="1"></i>
+              <i class="las la-star" data-value="1"></i>
+                <i class="las la-star" data-value="1"></i>
+                  <i class="las la-star" data-value="1"></i>
+           
+               </div>
+               {% elseif r.note==5%} 
+                      <div class="stars">
+            <i class="las la-star" data-value="1"></i>
+              <i class="las la-star" data-value="1"></i>
+                <i class="las la-star" data-value="1"></i>
+                  <i class="las la-star" data-value="1"></i>
+                   <i class="las la-star" data-value="1"></i>
+           
+               </div>
+
+                {% else %}  
+                      <div class="stars">
+           
+           
+               </div>
+ {% endif%}  
+
+
+
+<form  method="POST" action="{{path('modifierRandoNote',{'id':r.id})}}">
+       <div class="stars">
+            <i class="lar la-star" data-value="1"></i><i class="lar la-star" data-value="2"></i><i class="lar la-star" data-value="3"></i><i class="lar la-star" data-value="4"></i><i class="lar la-star" data-value="5"></i>
+        
+          
+             <input type="hidden" name="note" id="note"  >
+            <button class="fa fa-chevron-right" position='absolute'  type="submit"></button>
+     
+        </div>  
+        </form>
        
     
 	 
