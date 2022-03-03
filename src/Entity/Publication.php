@@ -62,15 +62,17 @@ class Publication
      */
     private $commentaires;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="publications")
-     */
-    private $idclient;
+ 
 
     /**
      * @ORM\Column(type="integer")
      */
     private $views;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="publications")
+     */
+    private $user;
 
     public function __construct()
     {
@@ -150,17 +152,7 @@ class Publication
         return $this;
     }
 
-    public function getIdclient(): ?client
-    {
-        return $this->idclient;
-    }
-
-    public function setIdclient(?client $idclient): self
-    {
-        $this->idclient = $idclient;
-
-        return $this;
-    }
+   
 
     public function getViews(): ?int
     {
@@ -170,6 +162,18 @@ class Publication
     public function setViews(int $views): self
     {
         $this->views = $views;
+
+        return $this;
+    }
+
+    public function getUser(): ?user
+    {
+        return $this->user;
+    }
+
+    public function setUser(?user $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

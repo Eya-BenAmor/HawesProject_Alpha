@@ -76,6 +76,7 @@
     
  <!-- About -->
     {%for  p in publication %}
+    
     <section class="about d-flex align-items-center text-light py-5" id="about">
  
     
@@ -99,7 +100,7 @@
             <div class="my-3">
               <a class="btn" href="{{path('addcom',{'id':p.id})}}" >ajouter commentaire</a>
 
-              {%if p.idClient.id== 1 %}
+              {%if p.user.id== 1 %}
 
                <a class="btn" href="{{path('deletepub',{'id':p.id})}}" >supprimer votre publication</a>
 

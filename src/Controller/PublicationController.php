@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bridge\Doctrine\Logger\DbalLogger;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Publication;
-use App\Entity\Client;
+use App\Entity\User;
 use App\Repository\PublicationRepository ;
 use App\Form\PublicationType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\File\File;
-use Knp\Component\Pager\PaginatorInterface;
 use App\Notifications\NouveauPublicationNotification;
 use PHPMailer\PHPMailer\PHPMailer;
 use Swift_SmtpTransport;
@@ -31,8 +30,7 @@ use Swift_Mailer;
 
 require_once 'C:\Users\EYA\Desktop\HawesProject_Alpha\vendor\autoload.php';
 
-
-
+ 
 
 
 
@@ -105,15 +103,15 @@ class PublicationController extends AbstractController
         $publication=new publication() ; // nouvelle instance 
         $form=$this->createForm(PublicationType::class,null);
         $form->handleRequest($request);
-         $rep=$this->getDoctrine()->getRepository(Client::class);
+         $rep=$this->getDoctrine()->getRepository(User::class);
      
-      $client=$rep->find('1');
+      $user=$rep->find('1');
         if ($form->isSubmitted() && $form->isValid() ) 
         {
             
         $publication=$form->getData();
         /** @var UploadedFile $File */
-        $publication->setIdclient($client);
+        $publication->setUser($user);
         $photoFile = $form->get('photo')->getData();
 
         // this condition is needed because the 'photo' field is not required
@@ -167,13 +165,13 @@ class PublicationController extends AbstractController
         $publication=$rep->find($id); 
         $form=$this->createForm(PublicationType::class,$publication);
         $form->handleRequest($request);
-        $rep=$this->getDoctrine()->getRepository(Client::class);
+        $rep=$this->getDoctrine()->getRepository(User::class);
      
-      $client=$rep->find('1');
+      $user=$rep->find('1');
 if ($form->isSubmitted() && $form->isValid())
 {
 $publication=$form->getData();
-   $publication->setIdclient($client);
+   $publication->setUser($user);
         $photoFile = $form->get('photo')->getData();
 // this condition is needed because the 'photo' field is not required
         // so the imagefile must be processed only when a file is uploaded
@@ -269,8 +267,7 @@ public function searchAction(Request $request)
     }
     public function getRealEntities($publication ){
         foreach ($publication  as $publication ){
-            $realEntities[$publication ->getId()] = [$publication->getNom()];
-
+            $realEntities[$publication ->getId()] = [$publication->getNom(),$publication->getDescription(),$publication->getPhoto()];
         }
         return $realEntities;
     }

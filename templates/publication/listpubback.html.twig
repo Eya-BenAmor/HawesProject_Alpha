@@ -86,15 +86,13 @@
                             $.each(result, function(key, arr) {
                                 $.each(arr, function(id, value) {
  
- 
-                                        if (id != 'error') {
-                                            console.log(id)
-window.location.replace("http://127.0.0.1:8000/listpubb/"+id)
-                                        }
+                                        if (id != 'error') {   
+                                                 entitySelector.append('<li> <h1 style="color:grey !important;"class="headline">'+value[0]+'</h1> <p  style="color:black !important;" class="para para-light py-3">'+value[1]+' </p><img  class="img-fluid" src="../'+value[2]+'" alt = '+value[2]+'/> </li>');
+                                        }  
                                         
                                         else {
                                             entitySelector.append('<li style="color:red;">'+value+'</li>');
-                                        }
+                                        }s
                                     
                                 });
                             });
@@ -139,8 +137,7 @@ window.location.replace("http://127.0.0.1:8000/listpubb/"+id)
   <tr>
    <th>nom </th>
    <th>description </th>
-  <th> code photo </th>
-   <th> id_Client </th>
+   <th> nom client  </th>
   <th>Action</th>
   </tr>
 
@@ -151,8 +148,8 @@ window.location.replace("http://127.0.0.1:8000/listpubb/"+id)
   <tr>
  <td> {{p.nom}}  </td>
 <td> {{p.description}}  </td>
-<td> {{p.photo}}  </td>
-<td> {{p.idclient.id}}  </td>
+
+<td> {{p.user.nom}} </td>
 
 
 <td> <a href="{{path('updatepub',{'id':p.id})}}" > Modifier</a>

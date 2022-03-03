@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Commentaire;
 use App\Entity\Publication;
-use App\Entity\Client;
+use App\Entity\User;
 use App\Repository\CommentaireRepository ;
 use App\Form\CommentaireType;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,13 +62,13 @@ class CommentaireController extends AbstractController
          $rep=$this->getDoctrine()->getRepository(Publication::class);
       
       $publication=$rep->find($id);
-      $rep2=$this->getDoctrine()->getRepository(Client::class);
-        $client=$rep2->find('1');
+      $rep2=$this->getDoctrine()->getRepository(User::class);
+        $user=$rep2->find('1');
 if ($form->isSubmitted() && $form->isValid())
 {
     
 $commentaire=$form->getData();
-$commentaire->setIdclient($client);
+$commentaire->setUser($user);
 $commentaire->setPublication($publication);
 $em=$this->getDoctrine()->getManager();
 $em->persist($commentaire);

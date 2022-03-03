@@ -33,10 +33,12 @@ class Commentaire
      */
     private $publication;
 
+  
+
     /**
-     * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="commentaires")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="commentaires")
      */
-    private $idclient;
+    private $user;
 
 
     public function getId(): ?int
@@ -68,14 +70,16 @@ class Commentaire
         return $this;
     }
 
-    public function getIdclient(): ?client
+    
+
+    public function getUser(): ?user
     {
-        return $this->idclient;
+        return $this->user;
     }
 
-    public function setIdclient(?client $idclient): self
+    public function setUser(?user $user): self
     {
-        $this->idclient = $idclient;
+        $this->user = $user;
 
         return $this;
     }
