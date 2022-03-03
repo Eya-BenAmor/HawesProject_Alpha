@@ -91,11 +91,11 @@
                     <!-- Card Slider -->
                     <div class="slider-container">
                         <div class="swiper-container card-slider">
-                            <div class="swiper-wrapper">
+                           
                                
                                 {%for r in competition %}
                                 <!-- Slide -->
-                                <div class="swiper-slide">
+                               
                                  
                                     <div class="testimonial-card p-4">
                                     <H3> {{r.Nom}} </H3>
@@ -107,6 +107,7 @@
     
 
      </tr>
+    
       <tr>
     <td> Nom: </td>
     <td> {{r.Nom}}  </td>
@@ -123,31 +124,28 @@
     <td>Prix: </td>
      <td> {{r.prix}}   </td>
   </tr>
+  
   </table> 
-      
-                                    </div>
-                                </div>
 
-                                
+ <a class="btn form-control-submit-button" href={{ path('cadeau_detail', {'id': r.id}) }} >detail</a>                
+
+                
                                 <!-- end of slide -->
                                
          {% endfor %}
 
+
+
                             </div> <!-- end of swiper-wrapper -->
         
                             <!-- Add Arrows -->
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <!-- end of add arrows -->
-        
-                        </div> <!-- end of swiper-container -->
-                    </div> <!-- end of slider-container -->
+                           
                     <!-- end of card slider -->
  
                 </div> <!-- end of col -->
                 
             </div> <!-- end of row -->
-           
+           {{ knp_pagination_render(competition) }}
         </div> <!-- end of container -->
     </div> <!-- end of testimonials -->
     

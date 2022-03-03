@@ -11,12 +11,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use App\Notifications\NouveauCompetitionNotification;
+use PHPMailer\PHPMailer\PHPMailer;
+use Swift_SmtpTransport;
+use Swift_Message;
+use Swift_Mailer;
+require_once 'C:\Users\Mezen Bayounes\Desktop\esprit\hawes-web\vendor\autoload.php';
 
 /**
  * @Route("/competition")
  */
 class CompetitionController extends AbstractController
 {
+    
 /**
      * @Route("/acceuil", name="acceuil", methods={"GET"})
      */
@@ -41,11 +51,16 @@ class CompetitionController extends AbstractController
 /**
      * @Route("/listerFront", name="listerFront")
      */
-    public function listerFront(): Response
+    public function listerFront(Request $request, PaginatorInterface $paginator): Response
     { 
         $rep=$this->getDoctrine()->getRepository(Competition::class);
         
         $competition =$rep-> findAll();
+        $competition = $paginator->paginate(
+            $competition, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            1 // Nombre de résultats par page
+        );
       
         return $this->render('competition/listerFront.html.twig', [
             'competition' => $competition,
@@ -68,6 +83,50 @@ class CompetitionController extends AbstractController
         ]);
     }
 
+
+
+
+/**
+     * @Route("/listp", name="competition_listp", methods={"GET"})
+     */
+    public function listp(CompetitionRepository $competitionRepository)
+    {
+
+
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+       $competition= $competitionRepository->findAll();
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('competition/listp.html.twig', [
+            'competition' => $competition,
+        ]);
+        
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (inline view)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => false
+        ]);
+    
+       
+    }
+
+
+
+
+
+
     /**
      * @Route("/new", name="competition_new", methods={"GET", "POST"})
      */
@@ -80,6 +139,8 @@ class CompetitionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($competition);
             $entityManager->flush();
+
+            $this->notify_creation->notify();
 
             return $this->redirectToRoute('competition_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -139,7 +200,20 @@ class CompetitionController extends AbstractController
 
 
 
+/**
+ * @var NouveauCompetitionNotification
+ */
+private $notify_creation;
 
+/**
+ * PublicationController constructor.
+ * @param NouveauCompetitionNotification $notify_creation
+ */
+public function __construct(NouveauCompetitionNotification $notify_creation)
+{
+    $this->notify_creation = $notify_creation;
+    
+}
 
 
 

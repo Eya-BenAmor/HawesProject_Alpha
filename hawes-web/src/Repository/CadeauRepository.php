@@ -47,4 +47,14 @@ class CadeauRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findDocumeByIdCadeau($competition_id){
+
+        return $this->createQueryBuilder('c')
+        ->Where('c.competition =:competition')
+        ->setParameter('competition',$competition_id)
+        ->getQuery()
+        ->getResult();
+    }
 }
+
+

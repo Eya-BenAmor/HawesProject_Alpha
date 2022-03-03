@@ -1,6 +1,9 @@
 {{ form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+
 <br>
 <br><br>
+
     {{ form_widget(form) }}
+    
     <button  class="btn btn-outline-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

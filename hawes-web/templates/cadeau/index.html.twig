@@ -68,17 +68,22 @@
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
+            
         {% endfor %}
         </tbody>
     </table>
+  
+
 
       {% block index %}
+      
     <section class="home py-5 d-flex align-items-center" id="header">
         <div class="container text-light py-5"  data-aos="fade-right"> 
             <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span>Pour vous</h1>
             <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
            
         </div> <!-- end of container -->
+        
 {% endblock %}
 {% block js %}
     <script src="{{ asset('back/assets/js/off-canvas.js')}}"></script>

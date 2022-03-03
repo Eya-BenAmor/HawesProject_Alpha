@@ -58,6 +58,10 @@ class Competition
      * @ORM\OneToMany(targetEntity=Cadeau::class, mappedBy="competition", cascade={"all"}, orphanRemoval=true)
      */
     private $id_cadeau;
+
+
+
+    
     public function __toString()
 {
     return $this->getNom();

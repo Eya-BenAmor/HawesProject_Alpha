@@ -31,6 +31,7 @@ class Cadeau
      *      allowEmptyString = false
      * )
      */
+    
     private $categorie_cadeau;
 
     /**

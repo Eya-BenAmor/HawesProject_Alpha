@@ -1,0 +1,77 @@
+
+{% block body %}
+
+    <h1 align="center">Competitions:</h2>
+
+    <table class="responstable" 
+>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom event</th>
+                <th>Distance</th>
+                <th>Date</th>
+                <th>Prix</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        {% for competition in competition %}
+            <tr>
+                <td>{{ competition.id }}</td>
+                <td>{{ competition.Nom }}</td>
+                <td>{{ competition.distance }}</td>
+                <td> {{competition.date.format('d/m/Y')}}</td>
+                <td>{{ competition.prix}}</td>
+              
+
+
+
+               
+           
+        {% else %}
+            <tr>
+                <td colspan="4">tableu vide</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+       
+    </table>
+ 
+
+   
+{% endblock %}
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br><br> <br> <br> <br> <br> <br>
+ <section class="home py-5 d-flex align-items-center">
+        
+
+
+
+ <table width="100%" border="0" cellspacing="0" cellpadding >
+        <thead>
+            <tr>
+                <th>Adresse  </th>
+                <th>Téléphone  </th>
+                <th>Mail     </th>
+                <th>Disponibilité   </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+      
+            <tr>
+                <td>El Ghazela Ariana</td>
+                <td>(800) 265  216 2020</td>
+                <td>hawes@gmail.com</td>
+                <td> 09:00 AM - 20:00 PM   </td>
+                
+               </tbody>
+
+   </table>
+
+               
+       
+
+
+
