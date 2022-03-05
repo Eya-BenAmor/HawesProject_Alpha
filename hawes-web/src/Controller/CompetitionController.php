@@ -26,7 +26,31 @@ require_once 'C:\Users\Mezen Bayounes\Desktop\esprit\hawes-web\vendor\autoload.p
  */
 class CompetitionController extends AbstractController
 {
-    
+    /**
+   * @Route("/search", name="ajax_search")
+   */
+  public function searchAction(Request $request)
+  {
+      $em = $this->getDoctrine()->getManager();
+      $nom = $request->get('q');
+      $competition =$em->getRepository(Competition::class)->findEntitiesByNom($nom);
+      if(!$competition ) {
+          $result['competition ']['error'] = "competition introuvable :( ";
+      } else {
+          $result['competition '] = $this->getRealEntities($competition );
+      }
+      return new Response(json_encode($result));
+  }
+  public function getRealEntities($competition ){
+      foreach ($competition  as $competition ){
+          $realEntities[$competition ->getId()] = [$competition->getNom(),$competition->getDistance(),$competition->getDate(), $competition->getPrix()];
+      }
+      return $realEntities;
+  }
+  
+  
+
+
 /**
      * @Route("/acceuil", name="acceuil", methods={"GET"})
      */
@@ -214,8 +238,6 @@ public function __construct(NouveauCompetitionNotification $notify_creation)
     $this->notify_creation = $notify_creation;
     
 }
-
-
 
 
 

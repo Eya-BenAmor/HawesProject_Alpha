@@ -48,5 +48,20 @@ class CompetitionRepository extends ServiceEntityRepository
     }
     */
 
+
+    public function findEntitiesByNom($Nom){
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT c
+                FROM App\Entity\Competition c
+                WHERE c.Nom LIKE :nom'
+            )
+            ->setParameter('nom', '%'.$Nom.'%')
+            ->getResult();
+    }
+
+
+
+
 }
 

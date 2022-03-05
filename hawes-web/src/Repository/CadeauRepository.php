@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Cadeau;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Query;
+
 
 /**
  * @method Cadeau|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +22,9 @@ class CadeauRepository extends ServiceEntityRepository
         parent::__construct($registry, Cadeau::class);
     }
 
+
+    
+    
     // /**
     //  * @return Cadeau[] Returns an array of Cadeau objects
     //  */
@@ -47,6 +53,22 @@ class CadeauRepository extends ServiceEntityRepository
         ;
     }
     */
+   
+
+
+        public function findEntitiesByNom($nom){
+            return $this->getEntityManager()
+                ->createQuery(
+                    'SELECT c
+                    FROM App\Entity\Cadeau c
+                    WHERE c.nom LIKE :nom'
+                )
+                ->setParameter('nom', '%'.$nom.'%')
+                ->getResult();
+        }
+
+
+
     public function findDocumeByIdCadeau($competition_id){
 
         return $this->createQueryBuilder('c')
@@ -55,6 +77,11 @@ class CadeauRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+
+
+
+
+
 }
 
 

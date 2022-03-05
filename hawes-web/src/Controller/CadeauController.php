@@ -21,6 +21,33 @@ use Dompdf\Options;
 class CadeauController extends AbstractController
 {
 
+
+     /**
+   * @Route("/search", name="ajax_search")
+   */
+public function searchAction(Request $request)
+{
+    $em = $this->getDoctrine()->getManager();
+    $nom = $request->get('q');
+    $cadeau =$em->getRepository(Cadeau::class)->findEntitiesByNom($nom);
+    if(!$cadeau ) {
+        $result['cadeau ']['error'] = "cadeau introuvable :( ";
+    } else {
+        $result['cadeau '] = $this->getRealEntities($cadeau );
+    }
+    return new Response(json_encode($result));
+}
+public function getRealEntities($cadeau ){
+    foreach ($cadeau  as $cadeau ){
+        $realEntities[$cadeau ->getId()] = [$cadeau->getNom(),$cadeau->getCategorieCadeau(),$cadeau->getDescriptionCadeau(), $cadeau->getCompetition()];
+    }
+    return $realEntities;
+}
+
+
+
+
+
  /**
      * @Route("det/{id}", name="cadeau_detail", methods={"GET"})
      */
@@ -205,8 +232,5 @@ class CadeauController extends AbstractController
 
 
 
-
-
-
-
+    
 }
