@@ -49,7 +49,7 @@ class CompetitionRepository extends ServiceEntityRepository
     */
 
 
-    public function findEntitiesByNom($Nom){
+    public function findEntitiesByNom1($Nom){
         return $this->getEntityManager()
             ->createQuery(
                 'SELECT c

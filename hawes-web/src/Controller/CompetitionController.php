@@ -27,13 +27,13 @@ require_once 'C:\Users\Mezen Bayounes\Desktop\esprit\hawes-web\vendor\autoload.p
 class CompetitionController extends AbstractController
 {
     /**
-   * @Route("/search", name="ajax_search")
+   * @Route("/search", name="ajax_search1")
    */
   public function searchAction(Request $request)
   {
       $em = $this->getDoctrine()->getManager();
       $nom = $request->get('q');
-      $competition =$em->getRepository(Competition::class)->findEntitiesByNom($nom);
+      $competition =$em->getRepository(Competition::class)->findEntitiesByNom1($nom);
       if(!$competition ) {
           $result['competition ']['error'] = "competition introuvable :( ";
       } else {

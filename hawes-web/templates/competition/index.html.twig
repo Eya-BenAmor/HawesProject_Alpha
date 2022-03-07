@@ -6,7 +6,7 @@
 
 <div class="main-panel">
           <div class="content-wrapper">
-   <h2> rechercher un cadeau !!</h2>
+   <h2> rechercher une competition !!</h2>
 
         <div class="sidebar-search">
       <div class="input-group custom-search-form">
@@ -37,7 +37,7 @@
                     searchRequest.abort();
                 searchRequest = $.ajax({
                     type: "GET",
-                    url: "{{ path('ajax_search') }}",
+                    url: "{{ path('ajax_search1') }}",
                     data: {
                         'q' : value
                     },
