@@ -71,28 +71,38 @@
 		<div class="field" tabindex="1">
 		<td>{{form_label(formA.nomRando,"Nom randonnée")}}</td>
 		<td>{{form_widget(formA.nomRando)}}</td>
+     <div class="text-danger">
 <td>{{form_errors(formA.nomRando)}}</td>
 		</div>
+    </div>
 		<div class="field" tabindex="2">
 		<td>{{form_label(formA.destination,"Destination")}}</td>
 <td>{{form_widget(formA.destination)}}</td>
+  <div class="text-danger">
 <td>{{form_errors(formA.destination)}}</td>
 	</div>
+  	</div>
 		<div class="field" tabindex="3">
 <td>{{form_label(formA.categorieRando,"Categorie")}}</td>
 <td>{{form_widget(formA.categorieRando)}}</td>
+ <div class="text-danger">
 <td>{{form_errors(formA.categorieRando)}}</td>
 	</div>
+  </div>
     <div class="field" tabindex="3">
 <td>{{form_label(formA.dateRando,"Date de la randonnée")}}</td>
 <td>{{form_widget(formA.dateRando)}}</td>
+ <div class="text-danger">
 <td>{{form_errors(formA.dateRando)}}</td>
 	</div>
+  </div>
     <div class="field" tabindex="4">
 <td>{{form_label(formA.dureeRando,"Duree de la randonnée")}}</td>
 <td>{{form_widget(formA.dureeRando)}}</td>
+<div class="text-danger">
 <td>{{form_errors(formA.dureeRando)}}</td>
 	</div>
+  </div>
     <div class="field" tabindex="4">
 <td>{{form_label(formA.description,"Description")}}</td>
 <td>{{form_widget(formA.description)}}</td>
@@ -113,6 +123,11 @@
 <div class="text-danger">
 <td>{{form_errors(formA.image)}}</td>
 	</div>
+  
+ <div class="field" tabindex="4">
+<td>{{form_label(formA.couleur,"Couleur")}}</td>
+<td>{{form_widget(formA.couleur)}}</td>
+
 		<button type="submit">Modifier</button>
 	
 	{{form_end(formA)}}
@@ -121,12 +136,12 @@
 
 <!-- This is not part of Pen -->
 <a class="me" href="https://codepen.io/uzcho_/pens/popular/?grid_type=list" target="_blank" style="color:#000"></a>
-          </div>
-           </div>
+         
 
 {% endblock %}
 
 {% block js %}
+ <script src="../back/assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="../back/assets/js/off-canvas.js"></script>
     <script src="../back/assets/js/hoverable-collapse.js"></script>
     <script src="../back/assets/js/misc.js"></script>

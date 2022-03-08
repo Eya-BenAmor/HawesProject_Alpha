@@ -24,6 +24,10 @@
 
 
  <div class="main-panel">
+
+
+
+
           <div class="content-wrapper">
    
             <div class="row">
@@ -32,7 +36,10 @@
                   <ul class="nav nav-tabs tab-transparent" role="tablist">
                   
                     <li class="nav-item">
-                      <a class="nav-link active"  href="{{path('listerRando')}}" aria-selected="true">Afficher</a>
+                      <a class="nav-link active"  href="{{path('listerParticipant')}}" aria-selected="true">Afficher</a>
+                    </li>
+                     <li class="nav-item">
+                      <a class="nav-link "  href="{{path('stats')}}" aria-selected="true">Statistiques</a>
                     </li>
                    
                   </ul>
@@ -59,7 +66,7 @@
   </tr>
   {%for r in parti %}
   <tr>
-   <td> {{r.client.nom~r.client.prenom}} </td>
+   <td> {{r.user.nom~r.user.prenom}} </td>
 <td> {{r.randonnee.nomRando}}  </td>
     <td> {{r.age}} </td>
 <td> {{r.tel}}  </td>
@@ -92,4 +99,7 @@
     <!-- Custom js for this page -->
     <script src="back/assets/js/dashboard.js"></script>
     
+
+
+
     {% endblock %}

@@ -9,7 +9,7 @@
     <link href="../front/css/aos.min.css" rel="stylesheet">
     <link href="../front/css/swiper.css" rel="stylesheet">
      <link href="../front/css/style.css" rel="stylesheet">
-   
+    <link href="../front/css/style4.css" rel="stylesheet">
   
 
     <!-- Favicon -->
@@ -34,19 +34,24 @@
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href={{path('indexFront')}}>Home</a>
+                        <a class="nav-link " aria-current="page" href={{path('indexFront')}}>Home</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="{{path('histo')}}">Historiques</a>
+                    </li>      
                     <li class="nav-item dropdown">
                        <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Randonnées</a>
                         
                       
                          <ul class="dropdown-menu" aria-labelledby="dropdown01">
                          
-                            <li><a class="dropdown-item" href={{('chercherRando3')}}>A pied</a></li>
+                           <li><a class="dropdown-item" href={{('chercherRando3')}} >A pied</a></li>
                             <li><div class="dropdown-divider"></div></li>
                             <li><a class="dropdown-item" href={{('chercherRando1')}}>Au vélo</a></li>
                             <li><div class="dropdown-divider"></div></li>
                             <li><a class="dropdown-item" href={{('chercherRando2')}}>Au voiture</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href={{('listerFront')}}>Tous</a></li>
                         </ul>
                         
                     </li>
@@ -100,7 +105,8 @@
                                         <td>{{form_label(formA.age,"Votre téléphone*")}}</td>
 		                          <td>{{form_widget(formA.tel)}}</td>
                                   <div class="text-danger">
-                              <td>{{form_errors(formA.tel)}}</td>  </div>  
+                              <td>{{form_errors(formA.tel)}}</td>  
+                              </div>  
                                </tr>   
                                     </div>                                 
                                 </div>
@@ -120,7 +126,8 @@
                                   <div class="text-danger">
                               <td> {{form_errors(formA.classe)}}</td> </div>  
                               </tr> 
-                            </div>                            
+                            </div>  
+                           {#{{ form_row(formA.captchaCode) }}#}                      
                         </div>
                        <div class="btn form-control-submit-button">
                           	<button type="submit">Ajouter</button>
@@ -131,11 +138,62 @@
                
                 </div> <!-- end of col -->
              <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
-                    <img class="img-fluid d-none d-lg-block" src="../front/assets/images/contact.jpg" alt="contact">        
+             
+              <div class=grayscale div img>
+                 <div >
+
+                   <img class="img-fluid" src="../front/assets/images/contact.jpg" alt="contact">      
+                     </div>
+                 </div>
+                   
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
     </section> <!-- end of contact -->
+
+
+
+
+
+
+  <!-- Location -->
+    <section class="location text-light py-5">
+        <div class="container" data-aos="zoom-in">
+            <div class="row">
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-map fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Adresse</h6>
+                        <p>El Ghazela Ariana</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center" >
+                    <div class="p-2"><i class="fas fa-mobile-alt fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Téléphone</h6>
+                        <p>(800) 265  216 2020</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center" >
+                    <div class="p-2"><i class="far fa-envelope fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Mail</h6>
+                        <p>hawes@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center" >
+                    <div class="p-2"><i class="far fa-clock fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Disponibilité</h6>
+                        <p>09:00 AM - 20:00 PM</p>
+                    </div>
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </section> <!-- end of location -->
+
+
+
 
 {% endblock  %}
 {% block footer  %}
@@ -149,6 +207,12 @@
            
         </div> <!-- end of container -->
     </div> <!-- end of bottom -->
+     <!-- Back To Top Button -->
+    <button onclick="topFunction()" id="myBtn">
+        <img src="../front/assets/images/up-arrow.png" alt="alternative">
+    </button>
+    <!-- end of back to top button -->
+
  {% endblock  %}
 
     {% block js %}

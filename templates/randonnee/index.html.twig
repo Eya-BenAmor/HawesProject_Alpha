@@ -24,33 +24,6 @@
                
 
        <div class="main-panel">
-     
-
-
-<div class="sidebar-search">
-      <div class="input-group custom-search-form">
-          <input type="text" id="search" class="form-control" placeholder="Rechercher...">
-      </div>
-      <!-- /input-group -->
-  </div>
-  <ul class="nav" id="side-menu">
-      <li>
-          <a <span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level" id="entitiesNav">
-          </ul>
-      </li>
-  </ul>
-
-
-
-     
-  <ul class="nav" id="side-menu">
-      <li>
-         
-          <ul class="nav nav-second-level" id="entitiesNav">
-          </ul>
-      </li>
-  </ul>
           <div class="content-wrapper">
             <div class="row">
              
@@ -88,48 +61,5 @@
 
 
 
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
-
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        var searchRequest = null;
-        $("#search").keyup(function() {
-            var minlength = 3;
-            var that = this;
-            var value = $(this).val();
-            var entitySelector = $("#entitiesNav").html('');
-            if (value.length >= minlength ) {
-                if (searchRequest != null)
-                    searchRequest.abort();
-                searchRequest = $.ajax({
-                    type: "GET",
-                    url: "{{ path('ajax_search') }}",
-                    data: {
-                        'q' : value
-                    },
-                    dataType: "text",
-                    success: function(msg){
-                        //we need to check if the value is the same
-                        if (value==$(that).val()) {
-                            var result = JSON.parse(msg);
-                            $.each(result, function(key, arr) {
-                                $.each(arr, function(id, value) {
-                                    if (key == 'entities') {
-                                        if (id != 'error') {
-                                            entitySelector.append('<li><a>'+value+'</a></li>');
-                                        } else {
-                                            entitySelector.append('<li class="errorLi">'+value+'</li>');
-                                        }
-                                    }
-                                });
-                            });
-                        }
-                     }
-                });
-            }
-        });
-    });
-</script>
 
     {% endblock %}

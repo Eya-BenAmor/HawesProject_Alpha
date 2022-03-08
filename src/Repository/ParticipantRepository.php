@@ -47,6 +47,22 @@ class ParticipantRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByClient()
+    {
+        return $this->createQueryBuilder('p')
+               ->join('p.user', 'c')
+            ->addSelect('c')
+            ->where('c.id LIKE :id')
+            ->setParameter('id', '1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
+
     public function showByRandonnee($id)
     {
         return $this->createQueryBuilder('p')
@@ -60,18 +76,7 @@ class ParticipantRepository extends ServiceEntityRepository
     }
 
 
-    public function showByClient()
-    {
-        return $this->createQueryBuilder('p')
-               ->join('p.client', 'c')
-            ->addSelect('c')
-            ->where('c.id LIKE :id')
-            ->setParameter('id', '1')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+    
 
-
-
+   
 }

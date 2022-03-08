@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\Participant ;
+
 
 use App\Entity\Randonnee ;
 use App\Entity\User ;
+use App\Entity\Participant;
 use App\Repository\ParticipantRepository;
 use App\Form\ParticipantType;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class ParticipantController extends AbstractController
 {
     /**
@@ -27,11 +29,38 @@ class ParticipantController extends AbstractController
     }
 
 
+
+
+/**
+     * @Route("/histo", name="histo")
+     */
+    public function histo(Request $request,PaginatorInterface $paginator): Response
+    { 
+        $rep=$this->getDoctrine()->getRepository(Participant::class);
+        
+        $participant =$rep-> findByClient();
+
+        
+        $parti = $paginator->paginate(
+            $participant, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+      
+        return $this->render('participant/histo.html.twig', [
+            'parti' => $parti,
+           
+        ]);
+    }
+
+
+
      /**
      * @Route("/ajouterParticipant/{id}", name="ajouterParticipant")
      */
-    public function ajouterP(Request $request,$id,MailerInterface $mailer): Response
-    {
+    public function ajouterP(Request $request,$id,MailerInterface $mailer, SessionInterface $session): Response
+    { $idUser = $session->get("id");
+       
         $participant=new Participant() ; // nouvelle instance 
         $form=$this->createForm(ParticipantType::class,$participant);
         $form->handleRequest($request);
@@ -40,7 +69,7 @@ class ParticipantController extends AbstractController
       $randonnee=$rep->find($id);
       $rep2=$this->getDoctrine()->getRepository(User::class);
      
-      $User=$rep2->find('1');
+      $User=$rep2->find($idUser);
 if ($form->isSubmitted() && $form->isValid()) 
 {
 $participant=$form->getData();
@@ -168,27 +197,7 @@ return $this->redirectToRoute('listerParticipant');
         ]);
     }
 
-/**
-     * @Route("/histo", name="histo")
-     */
-    public function histo(Request $request,PaginatorInterface $paginator): Response
-    { 
-        $rep=$this->getDoctrine()->getRepository(Participant::class);
-        
-        $participant =$rep-> showByUser();
 
-        
-        $parti = $paginator->paginate(
-            $participant, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6 // Nombre de résultats par page
-        );
-      
-        return $this->render('participant/histo.html.twig', [
-            'parti' => $parti,
-           
-        ]);
-    }
 
 
 /**

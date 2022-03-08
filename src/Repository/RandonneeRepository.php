@@ -74,4 +74,27 @@ class RandonneeRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+
+
+    public function  showByCategorie($categorie)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.categorieRando LIKE :categorie')
+            ->setParameter('categorie', $categorie)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function  showByDestination($destination)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.destination like :destination')
+            ->setParameter('destination', '%'.$destination.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
