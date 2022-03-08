@@ -30,6 +30,41 @@ class RandonneeController extends AbstractController
 
 {
 
+ 
+
+
+    
+ /**
+     * @Route("/stats", name="stats")
+     */
+    public function statistiques(){
+        // On va chercher toutes les catégories
+        $rep=$this->getDoctrine()->getRepository(Randonnee::class);
+        $randonnees = $rep->findAll();
+
+        $nomRando = [];
+        $nbParticipant = [];
+        $couleur = [];
+       
+
+        
+        foreach($randonnees as $rando){
+            $nomRando[] = $rando->getNomRando();
+            $nbParticipant[] = count($rando->getParticipant());
+            $couleur[] =$rando->getCouleur();
+        }
+
+        
+       
+
+        return $this->render('Randonnee/stat.html.twig', [
+            'Nom' => json_encode($nomRando),
+        
+            'Count' => json_encode($nbParticipant),
+            'Couleur' => json_encode($couleur),
+           
+        ]);
+    } 
 
   /**
      * @Route("/index", name="index")
@@ -37,30 +72,36 @@ class RandonneeController extends AbstractController
     public function index(): Response
     {
        
-        $rep=$this->getDoctrine()->getRepository(Randonnee::class);
+       
+        $rep2=$this->getDoctrine()->getRepository(Randonnee::class);
         $em=$this->getDoctrine()->getManager();
-        $randonnee =$rep-> findAll();
+        $randonnee2 =$rep2-> findAll();
         date_default_timezone_set("Africa/Tunis");
         $date=date("d-m-Y");
         
-        foreach ($randonnee as $rando){
-            $date2=$rando->getDateRando()->format('d-m-Y');
+        foreach ($randonnee2 as $rando2){
+            $date2=$rando2->getDateRando()->format('d-m-Y');
            if(strtotime($date)== strtotime($date2)){
-            $em->remove($rando);
+            $em->remove($rando2);
         
             $em->flush(); 
          
          
            }
-        
         }
-        return $this->render('randonnee/index.html.twig', [
-            'controller_name' => 'RandonneeController',
-        ]);
+        return $this->redirectToRoute('listerRando');
+    
 
 
 
     }
+
+
+
+
+
+
+
 
 
 
@@ -170,22 +211,28 @@ else {
      */
     public function listerR(Request $request, PaginatorInterface $paginator): Response
     { 
+
+
         $rep=$this->getDoctrine()->getRepository(Randonnee::class);
         
         $randonnee =$rep-> findAll();
-
         $rando = $paginator->paginate(
             $randonnee, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            3 // Nombre de résultats par page
+            2 // Nombre de résultats par page
         );
       
-        return $this->render('randonnee/listerRando.html.twig', [
+      return $this->render('randonnee/listerRando.html.twig', [
             'rando' =>  $rando,
            
         ]);
-    }
+      
 
+
+
+
+    }
+     
 
     /**
      * @Route("/supprimerRando/{id}", name="supprimerRando")
@@ -366,37 +413,6 @@ return $this->redirectToRoute('listerFront');
 
 
 
- /**
-     * @Route("/stats", name="stats")
-     */
-    public function statistiques(){
-        // On va chercher toutes les catégories
-        $rep=$this->getDoctrine()->getRepository(Randonnee::class);
-        $randonnees = $rep->findAll();
-
-        $nomRando = [];
-        $nbParticipant = [];
-        $couleur = [];
-       
-
-        
-        foreach($randonnees as $rando){
-            $nomRando[] = $rando->getNomRando();
-            $nbParticipant[] = count($rando->getParticipant());
-            $couleur[] =$rando->getCouleur();
-        }
-
-        
-       
-
-        return $this->render('Randonnee/stat.html.twig', [
-            'Nom' => json_encode($nomRando),
-        
-            'Count' => json_encode($nbParticipant),
-            'Couleur' => json_encode($couleur),
-           
-        ]);
-    }
 
 
 
@@ -515,8 +531,6 @@ return new Response("mise a jour avec succes".json_encode($jsonContent));
 
       return $realEntities;
   }
-
-
 
 
 
