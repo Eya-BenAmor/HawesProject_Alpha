@@ -27,8 +27,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Swift_SmtpTransport;
 use Swift_Message;
 use Swift_Mailer;
-
-//require_once 'C:\Users\EYA\Desktop\HawesProject_Alpha\vendor\autoload.php';
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
  
 
@@ -36,6 +37,55 @@ use Swift_Mailer;
 
 class PublicationController extends AbstractController
 {   
+    
+    
+    
+  
+    /**
+     * @Route("/pdfPublication", name="pdfPublication")
+     */
+    public function pdfPublication(): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isRemoteEnabled', true);
+        
+        $rep=$this->getDoctrine()->getRepository(Publication::class);
+        
+        $pub =$rep->findAll();
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+       
+     
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('publication/pdf.html.twig', [
+            'pub' => $pub
+        ]);
+      
+        $options = new Options();
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+    }
+    
+    
+    
+    
+    
+    
     /**
      * @Route("/publication", name="publication")
      */
@@ -98,14 +148,14 @@ class PublicationController extends AbstractController
 /**
      * @Route("/addpub", name="addpub")
      */
-    public function add(Request $request): Response
+    public function add(Request $request, SessionInterface $session): Response
     {
         $publication=new publication() ; // nouvelle instance 
         $form=$this->createForm(PublicationType::class,null);
         $form->handleRequest($request);
          $rep=$this->getDoctrine()->getRepository(User::class);
-     
-      $user=$rep->find('1');
+         $idUser = $session->get("id");
+      $user=$rep->find($idUser);
         if ($form->isSubmitted() && $form->isValid() ) 
         {
             
@@ -160,14 +210,14 @@ class PublicationController extends AbstractController
     /**
      * @Route("/updatepub/{id}", name="updatepub")
      */
-    public function update(Request $request, $id): Response
+    public function update(Request $request, $id, SessionInterface $session): Response
     { $rep=$this->getDoctrine()->getRepository(publication::class);
         $publication=$rep->find($id); 
         $form=$this->createForm(PublicationType::class,$publication);
         $form->handleRequest($request);
         $rep=$this->getDoctrine()->getRepository(User::class);
-     
-      $user=$rep->find('1');
+        $idUser = $session->get("id");
+      $user=$rep->find( $idUser);
 if ($form->isSubmitted() && $form->isValid())
 {
 $publication=$form->getData();
@@ -215,9 +265,28 @@ return $this->redirectToRoute('listpub');
       $em->remove($publication);
       $em->flush(); 
 
-        return $this->redirectToRoute('listpubfront');
+        return $this->redirectToRoute('listpub');
        
     }
+
+
+
+ /**
+     * @Route("/deletepubFront/{id}", name="deletepubFront")
+     */
+    public function deletepubFront($id): Response
+    { $rep=$this->getDoctrine()->getRepository(publication::class);
+      $em=$this->getDoctrine()->getManager();
+      $publication=$rep->find($id);
+      $em->remove($publication);
+      $em->flush(); 
+
+        return $this->redirectToRoute('listpubFront');
+       
+    }
+
+
+
 
 
 /**

@@ -25,7 +25,7 @@
             <!-- <a class="navbar-brand logo-image" href="index.html"><img src="../front/assets/images/logo.svg" alt="alternative"></a> -->
 
             <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <a class="navbar-brand logo-text"  href={{path('addpub')}}>Hawes</a>
+            <a class="navbar-brand logo-text"  href={{path('indexFront')}}>Hawes</a>
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -122,18 +122,18 @@
 
                                    <div class="d-flex pt-4">
                          <div>
-                          <img
-                            class="avatar"
-                            src="../front/assets/images/eya.jpg" 
-                          />
+                       
                         </div>
                                     <div class="ms-3 pt-2">
                                     <h6>{{c.user.nom}} {{c.user.prenom}} </h6>
                         
                                      </div>
                                      <div class="my-3">
+                                      {%set id=app.session.get('id')%}
+                                      {% if c.user.id== id %}
                                       <a class="btn" href="{{path('updatecom',{'id':c.id})}}" >Modifier</a>
                                       <a class="btn" href="{{path('deletecom',{'id':c.id})}}" > supprimer</a>
+                                        {%endif%}
                                    </div>   
 
                                     </div>

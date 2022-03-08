@@ -14,7 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Notifications\NouveauPublicationNotification;
 use App\Repository\PublicationRepository ;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\AutoExpireFlashBag;
 class CommentaireController extends AbstractController
 {
     /**
@@ -54,16 +55,16 @@ class CommentaireController extends AbstractController
 /**
      * @Route("/addcom/{id}", name="addcom")
      */
-    public function add(Request $request,$id): Response
+    public function add(Request $request,$id, SessionInterface $session): Response
     {
         $commentaire=new commentaire() ; // nouvelle instance 
         $form=$this->createForm(CommentaireType::class,$commentaire);
         $form->handleRequest($request);
          $rep=$this->getDoctrine()->getRepository(Publication::class);
-      
+         $idUser = $session->get("id");
       $publication=$rep->find($id);
       $rep2=$this->getDoctrine()->getRepository(User::class);
-        $user=$rep2->find('1');
+        $user=$rep2->find($idUser);
 if ($form->isSubmitted() && $form->isValid())
 {
     
@@ -72,6 +73,7 @@ $commentaire->setUser($user);
 $commentaire->setPublication($publication);
 $em=$this->getDoctrine()->getManager();
 $em->persist($commentaire);
+$request->getSession()->getFlashBag()->add('notice', 'Un commentaire ajouté avec succes ');
 $em->flush();
 return $this->redirectToRoute('listpubfront');
 }

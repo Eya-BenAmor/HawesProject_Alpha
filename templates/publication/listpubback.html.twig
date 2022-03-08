@@ -123,6 +123,7 @@
   <tr>
    <th>nom </th>
    <th>description </th>
+     <th> nombre de vues  </th>
    <th> nom client  </th>
   <th>Action</th>
   </tr>
@@ -134,7 +135,7 @@
   <tr>
  <td> {{p.nom}}  </td>
 <td> {{p.description}}  </td>
-
+<td> {{p.views}}  </td>
 <td> {{p.user.nom}} </td>
 
 
@@ -147,7 +148,7 @@
   
   {% endfor %}
 </table>    
-
+<a href={{ path('pdfPublication') }} class="btn btn-light" >imprimer</a>
 </div>
            </div>          
 

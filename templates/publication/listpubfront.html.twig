@@ -26,7 +26,7 @@
             <!-- <a class="navbar-brand logo-image" href="index.html"><img src="front/assets/images/logo.svg" alt="alternative"></a> -->
 
             <!-- Text Logo - Use this if you don't have a graphic logo -->
-            <a class="navbar-brand logo-text"  href={{path('addpub')}}>Hawes</a>
+            <a class="navbar-brand logo-text"  href={{path('indexFront')}}>Hawes</a>
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -73,10 +73,16 @@
 
   
  
-    
+      
+{% for message in app.flashes('notice') %}
+   <center> <div class="alert alert-success"> 
+                {{ message }}
+            </div></center>
+{% endfor %}
+
  <!-- About -->
     {%for  p in publication %}
-    
+  
     <section class="about d-flex align-items-center text-light py-5" id="about">
  
     
@@ -99,10 +105,11 @@
 
             <div class="my-3">
               <a class="btn" href="{{path('addcom',{'id':p.id})}}" >ajouter commentaire</a>
+ {%set id=app.session.get('id')%}
+      
+              {%if p.user.id== id %}
 
-              {%if p.user.id== 1 %}
-
-               <a class="btn" href="{{path('deletepub',{'id':p.id})}}" >supprimer votre publication</a>
+               <a class="btn" href="{{path('deletepubFront',{'id':p.id})}}" >supprimer votre publication</a>
 
 
                {%endif%}
