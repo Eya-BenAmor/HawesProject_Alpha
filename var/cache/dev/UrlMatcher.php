@@ -15,6 +15,7 @@ return [
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
         '/commentaire' => [[['_route' => 'commentaire', '_controller' => 'App\\Controller\\CommentaireController::index'], null, null, null, false, false, null]],
         '/publication' => [[['_route' => 'publication', '_controller' => 'App\\Controller\\PublicationController::index'], null, null, null, false, false, null]],
+        '/pdfPublication' => [[['_route' => 'pdfPublication', '_controller' => 'App\\Controller\\PublicationController::pdfPublication'], null, null, null, false, false, null]],
         '/acceuil' => [[['_route' => 'acceuil', '_controller' => 'App\\Controller\\PublicationController::indexFront'], null, null, null, false, false, null]],
         '/listpubfront' => [[['_route' => 'listpubfront', '_controller' => 'App\\Controller\\PublicationController::listpubfront'], null, null, null, false, false, null]],
         '/listpub' => [[['_route' => 'listpub', '_controller' => 'App\\Controller\\PublicationController::list'], null, null, null, false, false, null]],

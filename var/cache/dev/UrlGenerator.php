@@ -21,6 +21,7 @@ return [
     'updatecom' => [['id'], ['_controller' => 'App\\Controller\\CommentaireController::update'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/updatecom']], [], []],
     'deletecom' => [['id'], ['_controller' => 'App\\Controller\\CommentaireController::deletepub'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/deletecom']], [], []],
     'publication' => [[], ['_controller' => 'App\\Controller\\PublicationController::index'], [], [['text', '/publication']], [], []],
+    'pdfPublication' => [[], ['_controller' => 'App\\Controller\\PublicationController::pdfPublication'], [], [['text', '/pdfPublication']], [], []],
     'acceuil' => [[], ['_controller' => 'App\\Controller\\PublicationController::indexFront'], [], [['text', '/acceuil']], [], []],
     'listpubfront' => [[], ['_controller' => 'App\\Controller\\PublicationController::listpubfront'], [], [['text', '/listpubfront']], [], []],
     'listpub' => [[], ['_controller' => 'App\\Controller\\PublicationController::list'], [], [['text', '/listpub']], [], []],

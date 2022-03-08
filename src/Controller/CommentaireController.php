@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Notifications\NouveauPublicationNotification;
 use App\Repository\PublicationRepository ;
+use Symfony\Component\HttpFoundation\Session\Flash\AutoExpireFlashBag;
 
 class CommentaireController extends AbstractController
 {
@@ -72,6 +73,7 @@ $commentaire->setUser($user);
 $commentaire->setPublication($publication);
 $em=$this->getDoctrine()->getManager();
 $em->persist($commentaire);
+$request->getSession()->getFlashBag()->add('notice', 'Un commentaire ajouté avec succes ');
 $em->flush();
 return $this->redirectToRoute('listpubfront');
 }

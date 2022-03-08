@@ -72,7 +72,11 @@
 
 
   
- 
+ {% for message in app.flashes('notice') %}
+   <center> <div class="alert alert-success"> 
+                {{ message }}
+            </div></center>
+{% endfor %}
     
  <!-- About -->
     {%for  p in publication %}

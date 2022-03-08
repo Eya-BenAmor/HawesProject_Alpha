@@ -24,11 +24,16 @@ use Symfony\Component\Validator\Validation;
 use Symfony\Component\HttpFoundation\File\File;
 use App\Notifications\NouveauPublicationNotification;
 use PHPMailer\PHPMailer\PHPMailer;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+ 
+
 use Swift_SmtpTransport;
 use Swift_Message;
 use Swift_Mailer;
 
-require_once 'C:\Users\EYA\Desktop\HawesProject_Alpha\vendor\autoload.php';
+
 
  
 
@@ -46,6 +51,48 @@ class PublicationController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/pdfPublication", name="pdfPublication")
+     */
+    public function pdfPublication(): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isRemoteEnabled', true);
+        
+        $rep=$this->getDoctrine()->getRepository(Publication::class);
+        
+        $pub =$rep->findAll();
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        
+       
+     
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('publication/pdf.html.twig', [
+            'pub' => $pub
+        ]);
+      
+        $options = new Options();
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+    }
+    
+    
+    
 
      /**
      * @Route("/acceuil", name="acceuil")
