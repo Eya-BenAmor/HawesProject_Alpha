@@ -1,0 +1,205 @@
+{% extends 'base-front.html.twig' %}
+
+ 
+{% block css %}
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../front/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../front/css/aos.min.css" rel="stylesheet">
+    <link href="../front/css/swiper.css" rel="stylesheet">
+     <link href="../front/css/style.css" rel="stylesheet">
+    <link href="../front/css/style4.css" rel="stylesheet">
+  
+
+    <!-- Favicon -->
+    <link rel="icon" href="../front/assets/images/.png">
+    {% endblock  %}
+
+     {% block menu %}
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="../front/assets/images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text"  href={{path('index')}}>Hawes</a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href={{path('indexFront')}}>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{path('histo')}}">Historiques</a>
+                    </li>       
+                    <li class="nav-item dropdown">
+                       <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Randonnées</a>
+                        
+                      
+                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                         
+                           <li><a class="dropdown-item" href={{('chercherRando3')}} >A pied</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href={{('chercherRando1')}}>Au vélo</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href={{('chercherRando2')}}>Au voiture</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href={{('listerFront')}}>Tous</a></li>
+                        </ul>
+                        
+                    </li>
+                    
+                
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+                       
+{% endblock  %}
+{% block index %}
+
+
+
+
+
+ <section class="home py-5 d-flex align-items-center" id="header">
+        <div class="container text-light py-5"  data-aos="fade-right"> 
+            <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span><br>Pour vous</h1>
+            <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+           
+        </div> <!-- end of container -->
+    </section> <!-- end of home -->
+
+
+
+
+ 
+  <section class="services d-flex align-items-center py-5" id="services">
+        <div class="container text-light">
+            <div class="text-center pb-4" >
+            
+                <h2 class="py-2">Supprimer et modifier vos participations</h2>
+               
+            </div>
+            
+            <div class="row gy-4 py-2" data-aos="zoom-in">
+             {%for p in parti %}
+             
+                <div class="col-lg-4">
+                
+                    <div class="card bg-transparent">
+                    
+                        <h4 class="py-2">{{p.randonnee.nomRando}}</h4>
+                        <table >
+  
+  <tr>
+    
+    <th>Date</th>
+    <th>Destination</span></th>
+    <th>Prix</th>
+   
+   
+    <th>Action</th>
+  </tr>
+ 
+  <tr>
+
+   <td> {{p.randonnee.dateRando|date('d-m-Y')}} </td>
+
+    <td> {{p.randonnee.destination}} </td>
+<td> {{p.randonnee.prix}}  </td>
+
+<td> <a href="{{path('modifierHisto',{'id':p.id})}}"  class="fa fa-edit" > </a>
+<a href="{{path('supprimerParticipant',{'id':p.id})}}"  class="fa fa-trash" ></a> </td>
+  </tr>
+  
+  
+  
+</table>    
+                    </div>
+                </div>
+                {% endfor %}
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </section> <!-- end of services -->
+
+{% do parti.setPageRange(1) %} {# Le nombre de numero de page qui s'affiche sur une page #}
+        {{ knp_pagination_render(parti, 'pagination/fron.html.twig') }}
+
+
+
+  <!-- Location -->
+    <section class="location text-light py-5">
+        <div class="container" data-aos="zoom-in">
+            <div class="row">
+                <div class="col-lg-3 d-flex align-items-center">
+                    <div class="p-2"><i class="far fa-map fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Adresse</h6>
+                        <p>El Ghazela Ariana</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center" >
+                    <div class="p-2"><i class="fas fa-mobile-alt fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Téléphone</h6>
+                        <p>(800) 265  216 2020</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center" >
+                    <div class="p-2"><i class="far fa-envelope fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Mail</h6>
+                        <p>hawes@gmail.com</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-flex align-items-center" >
+                    <div class="p-2"><i class="far fa-clock fa-3x"></i></div>
+                    <div class="ms-2">
+                        <h6>Disponibilité</h6>
+                        <p>09:00 AM - 20:00 PM</p>
+                    </div>
+                </div>
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </section> <!-- end of location -->
+
+
+
+
+{% endblock  %}
+{% block footer  %}
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light" >
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>Equipe Alpha 2022</p><br>
+               
+            </div>
+           
+        </div> <!-- end of container -->
+    </div> <!-- end of bottom -->
+     <!-- Back To Top Button -->
+    <button onclick="topFunction()" id="myBtn">
+        <img src="../front/assets/images/up-arrow.png" alt="alternative">
+    </button>
+    <!-- end of back to top button -->
+
+ {% endblock  %}
+
+    {% block js %}
+    <!-- Scripts -->
+    <script src="../front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
+    <script src="../front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="../front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
+    <script src="../front/js/aos.js"></script><!-- AOS on Animation Scroll -->
+    <script src="../front/js/script.js"></script>  <!-- Custom scripts -->
+   
+    {% endblock  %}

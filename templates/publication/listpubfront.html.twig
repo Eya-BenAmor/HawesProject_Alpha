@@ -1,0 +1,168 @@
+
+{% extends 'base-front.html.twig' %}
+
+ 
+{% block css %}
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../front/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../front/css/aos.min.css" rel="stylesheet">
+    <link href="../front/css/swiper.css" rel="stylesheet">
+     <link href="../front/css/style.css" rel="stylesheet">
+   
+  
+
+    <!-- Favicon -->
+    <link rel="icon" href="front/assets/images/.png">
+    {% endblock  %}
+
+     {% block menu %}
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="front/assets/images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text"  href={{path('addpub')}}>Hawes</a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href={{path('listpubfront')}}>Home</a>
+                    </li>
+                   
+                        <li class="nav-item dropdown">
+                       <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Forum</a>
+                        
+                      
+                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                         
+                             <li><a class="dropdown-item" href={{('addpub')}}>Ajouter une publication </a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href={{('listpubfront')}}> consulter le forum</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            
+                        </ul>
+                        
+                    </li>
+                
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+                       
+{% endblock  %}
+{% block index %}
+
+
+ <section class="home py-5 d-flex align-items-center" id="header">
+        <div class="container text-light py-5"  data-aos="fade-right"> 
+            <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span><br>Pour vous</h1>
+            <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+           
+        </div> <!-- end of container -->
+    </section> <!-- end of home -->
+
+
+  
+ 
+    
+ <!-- About -->
+    {%for  p in publication %}
+    
+    <section class="about d-flex align-items-center text-light py-5" id="about">
+ 
+    
+      <div class="container">
+      
+      
+        <div class="row d-flex align-items-center">
+
+          <div class="col-lg-7" data-aos="fade-right">
+           
+            <h1>
+               <br />
+           {{p.nom}}
+            </h1>
+            <p class="py-2 para-light">
+            {{p.description}}
+          
+            </p>
+           
+
+            <div class="my-3">
+              <a class="btn" href="{{path('addcom',{'id':p.id})}}" >ajouter commentaire</a>
+
+              {%if p.user.id== 1 %}
+
+               <a class="btn" href="{{path('deletepub',{'id':p.id})}}" >supprimer votre publication</a>
+
+
+               {%endif%}
+              <a class="btn" href="{{path('listcom',{'id':p.id})}}" >consulter les commentaires de cette publication</a>
+            </div>
+          </div>
+          <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+            <img
+              class="img-fluid"
+              src={{p.photo}} 
+            />
+          </div>
+
+         
+        </div>
+        <!-- end of row -->
+         
+      </div>
+      <!-- end of container -->
+     
+    </section>
+    {% endfor %}
+
+             
+
+              {{ knp_pagination_render(publication) }} 
+              
+        
+   
+
+     
+     
+    <!-- end of about -->
+
+
+
+
+{% endblock  %}
+{% block footer  %}
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light" >
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>Equipe Alpha 2022</p><br>
+               
+            </div>
+           
+        </div> <!-- end of container -->
+    </div> <!-- end of bottom -->
+ {% endblock  %}
+
+    {% block js %}
+    <!-- Scripts -->
+    <script src="../front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
+    <script src="../front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="../front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
+    <script src="../front/js/aos.js"></script><!-- AOS on Animation Scroll -->
+    <script src="../front/js/script.js"></script>  <!-- Custom scripts -->
+   
+    {% endblock  %}
+
+
+   

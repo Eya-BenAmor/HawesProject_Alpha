@@ -1,0 +1,37 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+        <div class="field" tabindex="1">
+        <td>{{form_label(form.nom,"Nom")}}</td>
+        <td>{{form_widget(form.nom, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+    <div class="text-danger">
+
+ </div>
+        </div>
+        <div class="field" tabindex="2">
+        <td>{{form_label(form.description,"Description")}}</td>
+<td>{{form_widget(form.description, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+  <div class="text-danger">
+<td>{{form_errors(form.description)}}</td>
+ </div>
+    </div>
+    <div class="field" tabindex="2">
+        <td>{{form_label(form.prix,"prix")}}</td>
+<td>{{form_widget(form.prix, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+  <div class="text-danger">
+<td>{{form_errors(form.prix)}}</td>
+ </div>
+    </div>
+     <div class="field" tabindex="2">
+        <td>{{form_label(form.id_categorie,"Catégorie")}}</td>
+<td>{{form_widget(form.id_categorie, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+  <div class="text-danger">
+<td>{{form_errors(form.id_categorie)}}</td>
+ </div>
+    </div>   
+   
+<br>
+        <button class="btn btn-outline-success" type="submit">Ajouter</button>
+    
+    
+   
+{{ form_end(form) }}

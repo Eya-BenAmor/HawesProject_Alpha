@@ -1,0 +1,204 @@
+{% extends 'base-front.html.twig' %}
+
+ 
+{% block css %}
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  
+    <link href="../front/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../front/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="../front/css/aos.min.css" rel="stylesheet">
+    <link href="../front/css/swiper.css" rel="stylesheet">
+     <link href="../front/css/style.css" rel="stylesheet">
+  
+
+    <!-- Favicon -->
+    <link rel="icon" href="../front/assets/images/.png">
+    {% endblock  %}
+
+     {% block menu %}
+       <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="../front/assets/images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text"  href={{path('addpub')}}>Hawes</a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href={{path('listpubfront')}}>Home</a>
+                    </li>
+                   
+                        <li class="nav-item dropdown">
+                       <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Forum</a>
+                        
+                      
+                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                         
+                             <li><a class="dropdown-item" href={{('addpub')}}>Ajouter une publication </a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href={{('acceuil')}}> consulter le forum</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            
+                        </ul>
+                        
+                    </li>
+                
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+                       
+{% endblock  %}
+{% block index %}
+
+
+ <section class="home py-5 d-flex align-items-center" id="header">
+        <div class="container text-light py-5"  data-aos="fade-right"> 
+            <h1 style="color:grey !important;"class="headline">{{publication.nom}}</h1>
+            <h6 style="color:grey !important;">nombre de  vues {{publication.views}}</h6>
+              <div class="col-lg-5 text-center py-4 py-sm-0" data-aos="fade-down">
+
+            <img
+            class="img-fluid"
+              
+              src="../{{publication.photo}}"  alt={{publication.photo}}
+            />
+            </div>
+            <p  style="color:white !important;" class="para para-light py-3">{{publication.description}} </p>
+           
+        </div> <!-- end of container -->
+    </section> <!-- end of home -->
+
+
+  
+
+ 
+    <!-- Testimonials -->
+    <div class="slider-1 testimonial text-light d-flex align-items-center">
+    
+       <div class="container">
+          <div class="row">
+          <div class="text-center w-lg-75 m-auto pb-4">
+            
+            <h2 class="py-2"> Tous les commentaires</h2>
+          
+            
+           
+          </div>
+          </div>
+          <!-- end of row -->
+ 
+          <div class="row p-2" data-aos="zoom-in">
+
+              <div class="col-lg-12">
+                 <!-- Card Slider -->
+
+                 <div class="slider-container"> 
+
+              <div class="swiper-container card-slider">
+        
+         <!-- Slide -->
+         
+           {%for  c in commentaire %}
+  
+                  <div class="swiper-slide">  
+                  
+                          
+                  
+                           <div class="testimonial-card p-4"> 
+                               <p>
+                                {{c.contenu}}
+                            
+                                </p>
+
+                                   <div class="d-flex pt-4">
+                         <div>
+                          <img
+                            class="avatar"
+                            src="../front/assets/images/eya.jpg" 
+                          />
+                        </div>
+                                    <div class="ms-3 pt-2">
+                                    <h6>{{c.user.nom}} {{c.user.prenom}} </h6>
+                        
+                                     </div>
+                                     <div class="my-3">
+                                      <a class="btn" href="{{path('updatecom',{'id':c.id})}}" >Modifier</a>
+                                      <a class="btn" href="{{path('deletecom',{'id':c.id})}}" > supprimer</a>
+                                   </div>   
+
+                                    </div>
+                                    </div>
+                                      </div>
+                                      {% endfor%}
+                                    <!-- end of swiper-slide -->
+                                     <!-- end of slide -->
+
+                 
+
+                  
+                                      
+                                      <!-- end of swiper-wrapper -->
+ 
+                                        <!-- Add Arrows -->
+                                     
+                                     <!-- end of add arrows -->
+                                      </div>
+                                     <!-- end of swiper-container -->
+
+                                       </div>  
+           
+                                        <!-- end of slider-container -->
+                                        <!-- end of card slider -->
+                                        </div>
+                                        <!-- end of col -->
+                                        </div>
+
+
+                                          <!-- end of row -->
+                                      </div>
+      <!-- end of container -->
+    </div>
+
+    <!-- end of testimonials -->
+    
+ 
+
+
+
+{% endblock  %}
+{% block footer  %}
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light" >
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>Equipe Alpha 2022</p><br>
+               
+            </div>
+           
+        </div> <!-- end of container -->
+    </div> <!-- end of bottom -->
+ {% endblock  %}
+
+    {% block js %}
+    <!-- Scripts -->
+     <script src="../front/js/bootstrap.min.js"></script><!-- Bootstrap framework -->
+    <script src="../front/js/purecounter.min.js"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="../front/js/swiper.min.js"></script><!-- Swiper for image and text sliders -->
+    <script src="../front/js/aos.js"></script><!-- AOS on Animation Scroll -->
+    <script src="../front/js/script.js"></script>  <!-- Custom scripts -->
+   
+   
+    {% endblock  %}
+
+
+   

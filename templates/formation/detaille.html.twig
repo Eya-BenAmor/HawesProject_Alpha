@@ -1,0 +1,181 @@
+{% extends 'base-front.html.twig' %}
+
+
+ 
+{% block css %}
+    <!-- Styles -->
+    <link href="{{ asset('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/fontawesome-all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/aos.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/swiper.css') }}" rel="stylesheet">
+     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
+   
+  
+
+    <!-- Favicon -->
+    <link rel="icon" "{{ asset('front/assets/images/.png') }}">
+    {% endblock  %}
+
+     {% block menu %}
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="front/assets/images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text"  href={{path('indexFront')}}>Hawes</a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href={{path('listerFrontFormation')}}>Home</a>
+                    </li>
+                   
+                   <li class="nav-item dropdown">
+                       <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Formation</a>
+                        
+                      
+                         
+                        
+                    </li>
+                    
+                
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+                       
+{% endblock  %}
+{% block index %}
+
+
+ <section class="home py-5 d-flex align-items-center" id="header">
+        <div class="container text-light py-5"  data-aos="fade-right"> 
+             <h1 class="headline"> S'inscrire Pour benifier de notre <span class="home_text">Formation</span><br> </h1>
+            <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+           
+        </div> <!-- end of container -->
+    </section> <!-- end of home -->
+
+ <section class="about d-flex align-items-center text-light py-5" id="about">
+ 
+     <div class="container" >
+         
+            <div class="row d-flex align-items-center">
+
+     <div class="col-lg-6">
+                                 <div class="form-group py-2">
+                           
+                                   <div class="block d-flex align-items-center">
+                                   
+                            <h2 class="pe-2"><i class="far fa-check-circle fa-1x"></i></H2>
+                               <H3> {{form.nomform}} </H3>
+                        </div>
+
+                
+                   
+                                   <h6> Plan de Formation :</h6>
+    <h6> {{form.plan}}</h6>
+      
+    
+    
+    Equipe: 
+    {{form.nomeq}}  <br>
+
+    Domaine: 
+    {{form.domaine}}  <br>
+ <a  href={{path('view',{'id': form.id})}} > Documents:</a>
+     
+     <br>
+     
+
+    
+  N'oubliez pas notre Date le 
+     {{form.date|date('d-m-Y')}} 
+    
+
+  
+   
+     </div>
+                 </div>
+                 
+                  <div class="my-3">
+                              <a class="btn" href={{path('partic_form_new')}} >s'inscrire</a>
+   
+                             
+                        
+                  </div>
+                  
+                        </div>
+                         </div> <!-- end of row -->
+        
+                      
+                         
+     
+                        
+                  </div>
+         
+           
+                  
+
+           
+     
+    </section> <!-- end of about -->
+
+   
+   
+   
+        
+  
+   
+   
+   
+
+                               
+
+                        
+                      
+            </div> <!-- end of row -->
+           
+        </div> <!-- end of container -->
+    </section> <!-- end of home -->
+ 
+    
+  
+
+
+
+
+{% endblock  %}
+{% block footer  %}
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light" >
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>Equipe Alpha 2022</p><br>
+               
+            </div>
+           
+        </div> <!-- end of container -->
+    </div> <!-- end of bottom -->
+ {% endblock  %}
+
+    {% block js %}
+    <!-- Scripts -->
+    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script><!-- Bootstrap framework -->
+    <script src="{{ asset('front/js/purecounter.min.js') }}"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="{{ asset('front/js/swiper.min.js') }}"></script><!-- Swiper for image and text sliders -->
+    <script src="{{ asset('front/js/aos.js') }}"></script><!-- AOS on Animation Scroll -->
+    <script src="{{ asset('front/js/script.js') }}"></script>  <!-- Custom scripts -->
+   
+    {% endblock  %}
+
+
+   

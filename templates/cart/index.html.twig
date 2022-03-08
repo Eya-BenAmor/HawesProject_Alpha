@@ -1,0 +1,98 @@
+{% extends 'base-panier.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+{% block css %}
+     <!-- plugins:css -->
+    <link rel="stylesheet" href="../back/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../back/assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../back/assets/css/style.css">
+    <!-- End layout styles -->
+    
+
+    {% endblock %}
+    {%block image %}
+                 
+              {%endblock%}
+{% block body %}
+
+    <section class="bg-light p-3">
+        <h1>Votre panier</h1>
+    </section>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Plat</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+             {% for element in dataPanier %}
+           <tr>
+                    <td>{{ element.plats.nom }}</td>
+                    <td class="text-end">{{ element.plats.prix }} €</td>
+                    <td>{{ element.quantite }}</td>
+                    <td class="text-end">{{ element.quantite * element.plats.prix }} €</td>
+                    <td>
+                        <a href="{{path("cart_add", {id: element.plats.id})}}" class="btn btn-success">
+                            <i class="bi bi-cart-plus"></i>
+                        </a>
+                        <a href="{{path("cart_remove", {id: element.plats.id})}}" class="btn btn-warning">
+                            <i class="bi bi-cart-dash"></i>
+                        </a>
+                        <a href="{{path("cart_delete", {id: element.plats.id})}}" class="btn btn-danger">
+                            <i class="bi bi-cart-x"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="text-center">Votre panier est vide</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total</td>
+                <td class="text-end">{{ total }} €</td>
+                <td>
+                    <a href="{{path("cart_delete_all")}}" class="btn btn-danger">
+                        <i class="bi bi-cart-x"></i>
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    
+
+
+
+  
+
+{% endblock %}
+
+
+
+{% block js %}
+  <script src="../back/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="../back/assets/js/off-canvas.js"></script>
+    <script src="../back/assets/js/hoverable-collapse.js"></script>
+    <script src="../back/assets/js/misc.js"></script>
+     <script  src="../back/assets/js/script.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../back/assets/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    {% endblock %}

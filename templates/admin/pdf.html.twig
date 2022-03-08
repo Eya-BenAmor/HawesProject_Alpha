@@ -1,0 +1,46 @@
+
+
+{% block title %}Formation index{% endblock %}
+
+{% block body %}
+    <h1>Formation index</h1>
+
+    <table class="responstable">
+        <thead>
+            <tr>
+              <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Cin</th>
+            </tr>
+        </thead>
+        <tbody>
+       {% for admin in admins %}
+            <tr>
+        
+               
+                <td>{{admin.nom}}</td>
+                <td>{{admin.prenom}}</td>
+                <td>{{admin.email}}</td>
+                <td>{{admin.cin}}</td>
+                
+            </tr>
+                    
+                   
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+   
+    </div>
+{% endblock %}
+
+
+

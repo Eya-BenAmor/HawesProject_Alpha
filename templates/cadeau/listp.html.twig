@@ -1,0 +1,67 @@
+
+{% block body %}
+
+    <h1 align="center">Cadeaux:</h2>
+
+   <table class="responstable" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Categorie_cadeau</th>
+                <th>Description_cadeau</th>
+                <th>Nom</th>
+                <th>Competition</th>
+            
+        </thead>
+        <tbody>
+        {% for cadeau in cadeau %}
+        
+            <tr>
+                <td>{{ cadeau.id }}</td>
+                <td>{{ cadeau.categorieCadeau }}</td>
+                <td>{{ cadeau.descriptionCadeau }}</td>
+                <td>{{ cadeau.nom }}</td>
+                <td>{{ cadeau.competition }}</td>
+
+                   
+        {% endfor %}
+        </tbody>
+    </table>
+ 
+
+   
+{% endblock %}
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+<br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+ <section class="home py-5 d-flex align-items-center">
+        
+
+
+
+ <table width="100%" border="0" cellspacing="0" cellpadding >
+        <thead>
+            <tr>
+                <th>Adresse  </th>
+                <th>Téléphone  </th>
+                <th>Mail     </th>
+                <th>Disponibilité   </th>
+               
+            </tr>
+        </thead>
+        <tbody>
+      
+            <tr>
+                <td>El Ghazela Ariana</td>
+                <td>(800) 265  216 2020</td>
+                <td>hawes@gmail.com</td>
+                <td> 09:00 AM - 20:00 PM   </td>
+                
+               </tbody>
+
+   </table>
+
+               
+       
+
+
+

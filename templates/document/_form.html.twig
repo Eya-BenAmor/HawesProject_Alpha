@@ -1,0 +1,45 @@
+{{ form_start(form) }}
+   {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+
+
+        <div class="field" tabindex="1">
+        <td>{{form_label(form.typedoc,"Type_document")}}</td>
+        <td>{{form_widget(form.typedoc, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+    <div class="text-danger">
+
+ </div>
+        </div>
+        <div class="field" tabindex="2">
+        <td>{{form_label(form.nombrepage,"nombre-de-page")}}</td>
+<td>{{form_widget(form.nombrepage, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+  <div class="text-danger">
+<td>{{form_errors(form.nombrepage)}}</td>
+ </div>
+    </div>
+        <div class="field" tabindex="3">
+<td>{{form_label(form.liendoc,"lien-de-document")}}</td>
+<td>{{form_widget(form.liendoc, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.liendoc)}}</td>
+    </div>
+  </div>
+    <div class="field" tabindex="3">
+<td>{{form_label(form.id_formation,"Nom-de-Lequipe")}}</td>
+<td>{{form_widget(form.id_formation, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.id_formation)}}</td>
+<br>
+<br>
+<button type="submit" class="btn btn-outline-success">Ajouter</button>
+</div>
+    </div>
+
+  </div>
+
+    </div>
+        
+    
+    
+   
+{{ form_end(form) }}

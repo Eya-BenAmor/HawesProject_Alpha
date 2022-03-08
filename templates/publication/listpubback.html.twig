@@ -1,0 +1,170 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Lister{% endblock %}
+ {% block css %}
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../back/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../back/assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="../back/assets/css/style.css">
+    <link rel="shortcut icon" href="../ack/assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    
+{% endblock %}
+    {%block image %}
+                
+              {%endblock%}
+{% block body %}
+
+
+ <div class="main-panel">
+          <div class="content-wrapper">
+   
+
+
+ 
+
+
+<h2> rechercher une publication !!</h2>
+
+        <div class="sidebar-search">
+      <div class="input-group custom-search-form">
+          <input type="text" id="search" class="form-control" placeholder="rechercher">
+      </div>
+      <!-- /input-group -->
+  </div>
+  <ul class="nav" id="side-menu">
+      <li>
+         
+          <ul class="nav nav-second-level" id="entitiesNav">
+          </ul>
+      </li>
+  </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 3;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_searchpub') }}",
+                    data: {
+                        'p' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+  
+                                        if (id != 'error') {   
+                                                 entitySelector.append('<br> nom: <a>  <a style="color:grey !important;"class="headline">'+value[0]+'</a> <br>Description:<p  style="color:black !important;" class="para para-light py-3">'+value[1]+' </p><img  class="img-fluid" src="../'+value[2]+'" alt = '+value[2]+'/> </a>');
+                                        }  
+                                        
+                                        else {
+                                            entitySelector.append('<li style="color:red;">'+value+'</li>');
+                                        }
+   
+                                });
+                            });
+                        }
+                     }
+                });
+            }
+        });
+    }); 
+</script>
+
+
+
+
+
+
+
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+                  <ul class="nav nav-tabs tab-transparent" role="tablist">
+                  
+                    <li class="nav-item">
+                      <a class="nav-link active"  href="{{path('listpub')}}" aria-selected="true">Afficher</a>
+                    </li>
+                   
+                  </ul>
+                 
+                  <div class="d-md-block d-none">
+                    <a href="#" class="text-light p-1"><i class="mdi mdi-view-dashboard"></i></a>
+                    <a href="#" class="text-light p-1"><i class="mdi mdi-dots-vertical"></i></a>
+                  </div>
+                </div>
+                
+                </div>  
+
+
+
+<table class="responstable">
+  
+  <tr>
+   <th>nom </th>
+   <th>description </th>
+   <th> nom client  </th>
+  <th>Action</th>
+  </tr>
+
+
+
+
+  {%for  p in publication %}
+  <tr>
+ <td> {{p.nom}}  </td>
+<td> {{p.description}}  </td>
+
+<td> {{p.user.nom}} </td>
+
+
+<td> <a href="{{path('updatepub',{'id':p.id})}}" class="fa fa-edit" ></a>
+
+<a href="{{path('deletepub',{'id':p.id})}}" class="fa fa-trash"  ></a> </td>
+
+  </tr>
+  
+  
+  {% endfor %}
+</table>    
+
+</div>
+           </div>          
+
+
+
+
+
+{% endblock %}
+
+
+
+{% block js %}
+    <script src="../back/assets/js/off-canvas.js"></script>
+    <script src="../back/assets/js/hoverable-collapse.js"></script>
+    <script src="../back/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../back/assets/js/dashboard.js"></script>
+    
+    {% endblock %}

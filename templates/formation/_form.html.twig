@@ -1,0 +1,53 @@
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+		<div class="field" tabindex="1">
+		<td>{{form_label(form.nomeq,"Nom")}}</td>
+		<td>{{form_widget(form.nomeq, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+    <div class="text-danger">
+
+ </div>
+		</div>
+		<div class="field" tabindex="2">
+		<td>{{form_label(form.domaine,"Domaine")}}</td>
+<td>{{form_widget(form.domaine, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+  <div class="text-danger">
+<td>{{form_errors(form.domaine)}}</td>
+ </div>
+	</div>
+		<div class="field" tabindex="3">
+<td>{{form_label(form.duree,"Duree")}}</td>
+<td>{{form_widget(form.duree, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.duree)}}</td>
+	</div>
+  </div>
+    <div class="field" tabindex="3">
+<td>{{form_label(form.nomform,"Nom Formation")}}</td>
+<td>{{form_widget(form.nomform, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.nomform)}}</td>
+</div>
+	</div>
+    <div class="field" tabindex="4">
+<td>{{form_label(form.plan,"Plan")}}</td>
+<td>{{form_widget(form.plan, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.plan)}}</td>
+	</div>
+  </div>
+    <div class="field" tabindex="4">
+<td>{{form_label(form.date,"Date")}}</td>
+<td>{{form_widget(form.date)}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.date)}}</td>
+</div>
+	</div>
+    <br>
+	 <button type="submit" class="btn btn-outline-success">Ajouter</button>
+	
+	
+   
+{{ form_end(form) }}
+
+

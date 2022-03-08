@@ -1,0 +1,143 @@
+
+{% extends 'base-back.html.twig' %}
+{% block title %}Categorie index{% endblock %}
+{% block css %}
+     <!-- plugins:css -->
+    <link rel="stylesheet" href="../back/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../back/assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../back/assets/css/style.css">
+    <!-- End layout styles -->
+    
+
+    {% endblock %}
+    {%block image %}
+                 
+              {%endblock%}
+{% block body %}
+   
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
+ <div class="main-panel">
+          <div class="content-wrapper">
+   
+            <div class="row">
+              <div class="col-md-12">
+                <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+                  <ul class="nav nav-tabs tab-transparent" role="tablist">
+                  
+                    
+                   
+                    <li class="nav-item">
+                      <a class="nav-link "  href="{{ path('categorie_new') }}" aria-selected="true">Ajouter</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active"  href="{{ path('categorie_index') }}" aria-selected="true">Afficher</a>
+                    </li>
+                  </ul>
+                 
+                  <div class="d-md-block d-none">
+                    <a href="#" class="text-light p-1"><i class="mdi mdi-view-dashboard"></i></a>
+                    <a href="#" class="text-light p-1"><i class="mdi mdi-dots-vertical"></i></a>
+                  </div>
+                </div>
+                
+                </div>  
+
+
+
+    <table class="responstable" >
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+       {% for categorie in categories %}
+        
+            <tr>
+              <td>{{ categorie.id }}</td>
+                <td>{{ categorie.nom }}</td>
+                <td>{{ categorie.description }}</td>
+
+               <td>
+                 
+                     <form method="post" action="{{ path('categorie_delete', {'id': categorie.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.id) }}">
+    <button  class="fa fa-trash"></button>
+</form>
+                    <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class="fa fa-edit"></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+            
+        {% endfor %}
+        </tbody>
+    </table>
+  
+
+
+     </div>
+           </div>          
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+{% block js %}
+  <script src="../back/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="../back/assets/js/off-canvas.js"></script>
+    <script src="../back/assets/js/hoverable-collapse.js"></script>
+    <script src="../back/assets/js/misc.js"></script>
+     <script  src="../back/assets/js/script.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../back/assets/js/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    {% endblock %}

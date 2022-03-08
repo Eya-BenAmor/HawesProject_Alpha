@@ -1,0 +1,261 @@
+{% extends 'base-front.html.twig' %}
+
+ 
+{% block css %}
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="{{ asset('front/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/fontawesome-all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/aos.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('front/css/swiper.css') }}" rel="stylesheet">
+     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet">
+   
+  
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('front/assets/images/.png') }}">
+    {% endblock  %}
+
+     {% block menu %}
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <!-- <a class="navbar-brand logo-image" href="index.html"><img src="front/assets/images/logo.svg" alt="alternative"></a> -->
+
+            <!-- Text Logo - Use this if you don't have a graphic logo -->
+            <a class="navbar-brand logo-text"  href={{path('indexFront')}}>Hawes</a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault" >
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href={{path('indexFront')}}>Home</a>
+                    </li>
+        
+                   <li class="nav-item dropdown">
+                       <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" href="#">Competitions et Cadeaux</a>
+                        
+                      
+                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                         
+                            <li><a class="dropdown-item" href={{path('listerFrontCadeau')}}>Cadeaux</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li><a class="dropdown-item" href={{path('listerFrontCompetition')}}>Competitions</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                          
+                        </ul>
+                        
+                    </li>
+                    
+            </div> <!-- end of navbar-collapse -->
+        </div> <!-- end of container -->
+    </nav> <!-- end of navbar -->
+    <!-- end of navigation -->
+                       
+{% endblock  %}
+{% block index %}
+
+
+ <section class="home py-5 d-flex align-items-center" id="header">
+        <div class="container text-light py-5"  data-aos="fade-right"> 
+            <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span><br>Pour vous</h1>
+            <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+           
+        </div> <!-- end of container -->
+    </section> <!-- end of home -->
+
+
+  <div class="location text-light py-5"">
+ 
+        <div class="container">
+      
+            <div class="row">
+ 
+                                                          <li <h2> rechercher un cadeau !!</h2>
+
+        <div class="sidebar-search">
+      <div class="input-group custom-search-form">
+          <input type="text" id="search" class="form-control" placeholder="rechercher">
+      </div>
+      <!-- /input-group -->
+  </div>
+  <ul class="nav" id="side-menu">
+      <li>
+         
+          <ul class="nav nav-second-level" id="entitiesNav">
+          </ul>
+      </li>
+  </ul><br><br><br><br>
+
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        var searchRequest = null;
+        $("#search").keyup(function() {
+            var minlength = 3;
+            var that = this;
+            var value = $(this).val();
+            var entitySelector = $("#entitiesNav").html('');
+            if (value.length >= minlength ) {
+                if (searchRequest != null)
+                    searchRequest.abort();
+                searchRequest = $.ajax({
+                    type: "GET",
+                    url: "{{ path('ajax_searchcad') }}",
+                    data: {
+                        'c' : value
+                    },
+                    dataType: "text",
+                    success: function(msg){
+                        //we need to check if the value is the same
+                        if (value==$(that).val()) {
+                            var result = JSON.parse(msg);
+                            $.each(result, function(key, arr) {
+                                $.each(arr, function(id, value) {
+ 
+                                        if (id != 'error') {   
+                                                 entitySelector.append('<li> Nom:<h1  style="color:white !important;"class="headline">'+value[0]+'</h1> Categorie : <p  style="color:white !important;" class="para para-light py-3">'+value[1]+' </p> Description :<p  style="color:white !important;" class="para para-light py-3">'+value[2]+' </p> </li>');
+                                        }  
+                                        
+                                        else {
+                                            entitySelector.append('<li style="color:red;">'+value+'</li>');
+                                        }s
+                                    
+                                });
+                            });
+                        }
+                     }
+                });
+            }
+        });
+    });
+</script> </li>
+                <div class="text-center w-lg-75 m-auto pb-4">
+                    <p>Hawes</p>
+                    <h2 class="py-2">Participez et gagnez</h2>
+                    <p class="para-light">et participer maintenant</p>
+                </div>
+            </div> <!-- end of row -->
+            
+             <div class="row p-2" data-aos="zoom-in">
+            
+                <div class="col-lg-12">
+ 
+                    <!-- Card Slider -->
+                    <div class="slider-container">
+                       
+                                {%for c in cadeau %}
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                 
+                                    <div class="testimonial-card p-4">
+                                    
+                                    <H3> {{c.nom}} </H3>
+                                     <table >
+                                       <tr>
+                                       
+   
+    
+     </tr>
+      <tr>
+    <td> Nom: </td>
+    <td> {{c.nom}}  </td>
+     </tr>
+     
+      <tr>
+    <td>description: </td>
+    <td> {{c.descriptionCadeau}}  </td>
+     </tr>
+     <tr>
+    <td>categorie: </td>
+    <td> {{c.categorieCadeau}}  </td> </tr>
+    <tr>
+    <td>competition: </td>
+     <td> {{c.competition}}   </td>
+  </tr>
+  </table> 
+    
+   
+ 
+                                 
+                                
+                                <!-- end of slide -->
+                               
+         {% endfor %}
+                            </div> <!-- end of swiper-wrapper -->
+        
+                            <!-- Add Arrows -->
+                           
+                            <!-- end of add arrows -->
+        
+                        </div> <!-- end of swiper-container -->
+                    </div> <!-- end of slider-container -->
+                    <!-- end of card slider -->
+ 
+                </div> <!-- end of col -->
+                
+            </div> <!-- end of row -->
+         
+    </div> <!-- end of testimonials -->
+    
+ 
+    
+    {{ knp_pagination_render(cadeau) }}
+        </div> <!-- end of container -->
+    </div> <!-- end of testimonials -->
+{% endblock  %}
+{% block footer  %}
+    <!-- Bottom -->
+    <div class="bottom py-2 text-light" >
+        <div class="container d-flex justify-content-between">
+            <div>
+                <p>Equipe Alpha 2022</p><br>
+               
+            </div>
+           
+        </div> <!-- end of container -->
+    </div> <!-- end of bottom -->
+ {% endblock  %}
+    {% block js %}
+    <!-- Scripts -->
+    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script><!-- Bootstrap framework -->
+    <script src="{{ asset('front/js/purecounter.min.js') }}"></script> <!-- Purecounter counter for statistics numbers -->
+    <script src="{{ asset('front/js/swiper.min.js') }}"></script><!-- Swiper for image and text sliders -->
+    <script src="{{ asset('front/js/aos.js') }}"></script><!-- AOS on Animation Scroll -->
+    <script src="{{ asset('front/js/script.js') }}"></script>  <!-- Custom scripts -->
+   
+    {% endblock  %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   

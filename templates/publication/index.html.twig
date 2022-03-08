@@ -1,0 +1,53 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}tableau de bord {% endblock %}
+{% block css %}
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../back/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../back/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../back/assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="../back/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="../back/assets/images/favicon.png" />
+    {% endblock %}
+{% block body %}
+
+
+       <div class="main-panel">
+          <div class="content-wrapper">
+             <div class="row">
+             
+              <div class="col-md-12">
+                 <center> <h1>Bienvenue dans votre espace admin  </h1></center>
+                   <center> <a><img src="../back/assets/images/l.png"  ></a> </center>
+                  </div>
+                
+                </div>
+                  
+</div>
+
+{% endblock %}
+
+
+
+ {% block js %}
+    <script src="../back/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="../back/assets/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+   
+    <script src="../back/assets/js/off-canvas.js"></script>
+    <script src="../back/assets/js/hoverable-collapse.js"></script>
+    <script src="../back/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="../back/assets/js/dashboard.js"></script>
+    {% endblock %}

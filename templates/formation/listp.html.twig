@@ -1,0 +1,47 @@
+
+
+
+{% block title %}Formation index{% endblock %}
+
+{% block body %}
+    <h1>Formation index</h1>
+
+    <table class="responstable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomeq</th>
+                <th>Domaine</th>
+                <th>Duree</th>
+                <th>Nomform</th>
+                <th>Plan</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in form %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>{{ formation.nomeq }}</td>
+                <td>{{ formation.domaine }}</td>
+                <td>{{ formation.duree }}</td>
+                <td>{{ formation.nomform }}</td>
+                <td>{{ formation.plan }}</td>
+                <td>{{ formation.date }}</td>
+                <td>
+                    
+                   
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div>
+   
+    </div>
+{% endblock %}
