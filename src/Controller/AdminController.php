@@ -44,7 +44,7 @@ class AdminController extends AbstractController
     }
     public function getRealEntities($admin){
         foreach ($admin  as $admin){
-            $realEntities[$admin ->getId()] = [$admin->getNom()];
+            $realEntities[$admin ->getId()] = [$admin->getPrenom(),$admin->getEmail()];
 
         }
         return $realEntities;

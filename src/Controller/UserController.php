@@ -23,6 +23,24 @@ class UserController extends AbstractController
 {
 
 
+
+
+
+     /**
+         * @Route("/logout", name="app_logout")
+         */
+        public function logout()
+        {
+            session_start();
+            session_unset();
+            session_destroy();
+                return $this->redirectToRoute('indexFront');
+        }
+
+
+
+
+
 /**
      * @Route("/log", name="app_login")
      */
@@ -39,6 +57,10 @@ class UserController extends AbstractController
             $mail = $request->request->get("email");
             $pswd = $request->request->get("pwd");
             $user= $rep->findOneBy(['email' => $mail]);
+            if(!$user ) {
+                return $this->redirectToRoute('log');
+            } else {
+               
             if($pswd == $user->getMdp())
             {
                 $session= new Session();
@@ -49,7 +71,7 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('indexFront');
             }
               
-            
+        }  
            
         }
         return $this->render('user/login.html.twig', [
@@ -58,6 +80,19 @@ class UserController extends AbstractController
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
     /**
