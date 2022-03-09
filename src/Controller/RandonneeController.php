@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 namespace App\Controller;
 use App\Entity\Randonnee ;
 use App\Entity\Participant ;
@@ -81,7 +77,7 @@ class RandonneeController extends AbstractController
         
         foreach ($randonnee2 as $rando2){
             $date2=$rando2->getDateRando()->format('d-m-Y');
-           if(strtotime($date)== strtotime($date2)){
+           if(strtotime($date)>= strtotime($date2)){
             $em->remove($rando2);
         
             $em->flush(); 
