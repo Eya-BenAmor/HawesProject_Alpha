@@ -64,6 +64,10 @@ class User
      * message="Vous n'avez pas saisi le même mot de passe !" )
      */
     private $confrim_mdp;
+ /**
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $participant;
 
     protected $captchaCode;
     

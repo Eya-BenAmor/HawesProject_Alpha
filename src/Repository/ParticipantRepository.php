@@ -48,13 +48,13 @@ class ParticipantRepository extends ServiceEntityRepository
     }
     */
 
-    public function findByClient()
+    public function showByUser($id)
     {
         return $this->createQueryBuilder('p')
                ->join('p.user', 'c')
             ->addSelect('c')
             ->where('c.id LIKE :id')
-            ->setParameter('id', '1')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getResult()
         ;

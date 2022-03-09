@@ -19,14 +19,14 @@
 
     {% endblock %}
     {%block image %}
-                  <img src="back/assets/images/faces/Image1.png" alt="image">
+                
               {%endblock%}
 {% block body %}
 
 
  <div class="main-panel">
  
-   
+  
 <div class="sidebar-search">
       <div class="input-group custom-search-form">
           <input type="text" id="search" class="form-control" placeholder="Rechercher...">
@@ -59,13 +59,17 @@
 {% endfor %}
 
 
-
+ 
           <div class="content-wrapper">
    
             <div class="row">
+          
               <div class="col-md-12">
+               
                 <div class="d-sm-flex justify-content-between align-items-center transaparent-tab-border {">
+               
                   <ul class="nav nav-tabs tab-transparent" role="tablist">
+                     
                     <li class="nav-item">
                     <a class="nav-link "  href="{{path('ajouterRando')}}" aria-selected="true" > Ajouter </a>
                      
@@ -81,9 +85,10 @@
                     <a href="#" class="text-light p-1"><i class="mdi mdi-dots-vertical"></i></a>
                   </div>
                 </div>
-                
+                <center> <a href="{{path('index')}}" class="fa fa-level-up"  ></a> </center>
                 </div>  
- 
+             
+  
 <table class="responstable" id="rowPub" >
   
   <tr>

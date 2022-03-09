@@ -16,33 +16,51 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Builder\BuilderRegistryInterface;
+use Endroid\QrCode\Builder\BuilderInterface;
+use Endroid\QrCodeBundle\Response\QrCodeResponse;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\LabelAlignment;
+use Endroid\QrCode\QrCode;
 class ParticipantController extends AbstractController
 {
-    /**
-     * @Route("/participant", name="participant")
-     */
-    public function index(): Response
+
+
+    public function __construct(BuilderInterface $customQrCodeBuilder)
     {
-        return $this->render('participant/participer.html.twig', [
-            'controller_name' => 'ParticipantController',
-        ]);
+        $result = $customQrCodeBuilder
+            ->size(400)
+            ->margin(20)
+            ->build();
     }
 
 
 
+/**
+     * @Route("/qrcode/{id}",name="qrcode")
+     */
+    public function qrcode(BuilderInterface $customQrCodeBuilder , $id ){
+    $rep=$this->getDoctrine()->getRepository(Participant::class);
+     $reservation = $rep->find($id);
+        return new QrCodeResponse($customQrCodeBuilder->size(400)
+        ->margin(20)
+        ->data('Un participant à : '.$reservation->getRandonnee()->getNomRando())
+        ->build());
+    }
 
 /**
      * @Route("/histo", name="histo")
      */
-    public function histo(Request $request,PaginatorInterface $paginator): Response
+    public function histo(Request $request,PaginatorInterface $paginator, SessionInterface $session): Response
     { 
         $rep=$this->getDoctrine()->getRepository(Participant::class);
+        $idUser = $session->get("id");
+        $participantA=$rep->showByUser($idUser);
         
-        $participant =$rep-> findByClient();
-
         
         $parti = $paginator->paginate(
-            $participant, // Requête contenant les données à paginer (ici nos articles)
+            $participantA, // Requête contenant les données à paginer (ici nos articles)
             $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             6 // Nombre de résultats par page
         );
@@ -52,6 +70,13 @@ class ParticipantController extends AbstractController
            
         ]);
     }
+
+
+
+
+
+
+
 
 
 
@@ -83,7 +108,7 @@ $nomC=$User->getNom();
 $prenom=$User->getPrenom();
 $nom=$randonnee->getNomrando();
 $duree=$randonnee->getDureeRando();
-/*$email = (new Email())
+$email = (new Email())
 ->from('haweswebsite@gmail.com')
 ->to($email)
 //->cc('cc@example.com')
@@ -102,7 +127,7 @@ Pour une durée de :  <b>'.$duree.' </b>
 Pour plus d informations n hésitez pas de nous contacter </div>');
 
 /** @var Symfony\Component\Mailer\SentMessage $sentEmail */
-//$sentEmail = $mailer->send($email);
+$sentEmail = $mailer->send($email);
 // $messageId = $sentEmail->getMessageId();
 
 // ...
@@ -154,6 +179,20 @@ return $this->redirectToRoute('indexFront');
         return $this->redirectToRoute('listerParticipant');
        
     }
+     /**
+     * @Route("/supprimerParticipantFront/{id}", name="supprimerParticipantFront")
+     */
+    
+    public function supprimerPFront($id): Response
+    { $rep=$this->getDoctrine()->getRepository(Participant::class);
+      $em=$this->getDoctrine()->getManager();
+      $participant=$rep->find($id);
+      $em->remove($participant);
+      $em->flush(); 
+
+        return $this->redirectToRoute('histo');
+       
+    }
 
 
 /**
@@ -180,6 +219,13 @@ return $this->redirectToRoute('listerParticipant');
         
 
     }
+
+
+
+
+
+
+
 
 
  /**

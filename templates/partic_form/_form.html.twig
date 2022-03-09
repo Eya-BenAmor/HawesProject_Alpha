@@ -1,4 +1,66 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+   
+ {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+    <div class="field" tabindex="1">
+    <td>{{form_label(form.nom,"Nom")}}</td>
+    <td>{{form_widget(form.nom, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+  
+    </div>
+    <div class="field" tabindex="2">
+    <td>{{form_label(form.prenom,"prenom")}}</td>
+<td>{{form_widget(form.prenom, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+  <div class="text-danger">
+<td>{{form_errors(form.prenom)}}</td>
+ </div>
+  </div>
+    <div class="field" tabindex="3">
+<td>{{form_label(form.id_formation,"Nom-equipe")}}</td>
+<td>{{form_widget(form.id_formation, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.id_formation)}}</td>
+  </div>
+  </div>
+    <div class="field" tabindex="3">
+<td>{{form_label(form.age,"age")}}</td>
+<td>{{form_widget(form.age, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.age)}}</td>
+</div>
+  </div>
+    <div class="field" tabindex="4">
+<td>{{form_label(form.exp,"experience ")}}</td>
+<td>{{form_widget(form.exp, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.exp)}}</td>
+  </div>
+  </div>
+       <div class="field" tabindex="4">
+<td>{{form_label(form.so_domaine,"Domaine-de-L'experience ")}}</td>
+<td>{{form_widget(form.so_domaine, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.so_domaine)}}</td>
+  </div>
+  </div>
+     <div class="field" tabindex="4">
+<td>{{form_label(form.so_ass,"Nom-de-l'association")}}</td>
+<td>{{form_widget(form.so_ass, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.so_ass)}}</td>
+  </div>
+  </div>
+     <div class="field" tabindex="4">
+<td>{{form_label(form.Numero,"Numero ")}}</td>
+<td>{{form_widget(form.Numero, {'attr': {'class': 'form-control form-control-lg'}})}}</td>
+<div class="text-danger">
+<td>{{form_errors(form.Numero)}}</td>
+  </div>
+ 
+  <br>
+  <br>
+  <button type="submit" class="btn btn-outline-success">Ajouter</button>
+  </div>
+    
+  
+  
+   
 {{ form_end(form) }}

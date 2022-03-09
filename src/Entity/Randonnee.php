@@ -65,7 +65,7 @@ class Randonnee
      *      message = "champs ne doit pas etre vide")
      * )
     
-    * @Assert\GreaterThan("today", message="La date ne doit pas être inférieure à la date d'aujourd'hui")
+    
   
      */
     private $dateRando;

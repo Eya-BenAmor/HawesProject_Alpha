@@ -101,9 +101,12 @@
   
   <tr>
     
-    <th>Date</th>
-    <th>Destination</span></th>
+    <th>Date Rando</th>
+  
     <th>Prix</th>
+     <th>Age</th>
+    <th>Telephone</span></th>
+   
    
    
     <th>Action</th>
@@ -113,11 +116,13 @@
 
    <td> {{p.randonnee.dateRando|date('d-m-Y')}} </td>
 
-    <td> {{p.randonnee.destination}} </td>
+  
 <td> {{p.randonnee.prix}}  </td>
+ <td> {{p.age}} </td>
+<td> {{p.tel}}  </td>
 
 <td> <a href="{{path('modifierHisto',{'id':p.id})}}"  class="fa fa-edit" > </a>
-<a href="{{path('supprimerParticipant',{'id':p.id})}}"  class="fa fa-trash" ></a> </td>
+<a href="{{path('supprimerParticipantFront',{'id':p.id})}}"  class="fa fa-trash" ></a> </td>
   </tr>
   
   

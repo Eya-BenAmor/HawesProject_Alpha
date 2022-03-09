@@ -59,4 +59,18 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
 
+
+    public function findEntitiesByNom($nom){
+        return $this->createQueryBuilder('a')
+        
+        ->where('a.nom=:nom')
+        ->setParameter('nom',$nom)
+        ->getQuery()
+        ->getResult();
+        
+        
+        }
+
+
+
 }

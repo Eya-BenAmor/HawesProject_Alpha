@@ -112,13 +112,7 @@
                     </li>
 
 
-  <li class="nav-item dropdown">
-                       <a class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false" > Bonjour {{ app.session.get('nom') }} </a>
-                        
-                      
-                     
-                        
-                    </li>
+  
 
 
 
@@ -137,8 +131,27 @@
     <!-- Home -->
     <section class="home py-5 d-flex align-items-center" id="header">
         <div class="container text-light py-5"  data-aos="fade-right"> 
-            <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span><br>Pour vous</h1>
-            <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+        {%set nom=app.session.get('nom')%}
+        {%if nom is empty %}
+
+         <h1 class="headline">Les meilleures <span class="home_text">Randonnées</span><br>Pour vous</h1>
+          <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+           
+          <div class="my-3">
+                            <a class="btn" href="{{path('app_login')}}" >Connecter</a>
+                             
+                        
+                  </div>
+        {%else%}
+            <h1 class="headline">Bienvenue <span class="home_text">{{ app.session.get('nom') }}</span><br></h1>
+             <p class="para para-light py-3">Hawes vise à encadrer les amoureux de la nature, leurs faire découvrir la beauté de notre pays, tout en préservant ces richesses bien fragiles et surtout apporter un plus aux communautés locales.</p>
+           
+             <div class="my-3">
+                            <a class="btn" href="{{path('app_logout')}}" >Déconnecter</a>
+                             
+                        
+                  </div>
+            {%endif%}
            
            
         </div> <!-- end of container -->
@@ -151,85 +164,7 @@
    
 
 
-    <!-- Contact -->
-    <section class="location text-light py-5" id="contact">
-        <div class="container-fluid text-light">
-            <div class="row">
-                <div class="col-lg-6 d-flex justify-content-center justify-content-lg-end align-items-center px-lg-5" data-aos="fade-right">
-                    <div style="width:90%">
-                        <div class="text-center text-lg-start py-4 pt-lg-0">
-                            <p>Se connecter</p>
-                           
-                        </div>
-                        <div>
-                            <div class="row" >
-                                <div class="col-lg-6">
-                                    <div class="form-group py-2">
-                                        <input type="text" class="form-control form-control-input" id="exampleFormControlInput1" placeholder="Enter name">
-                                    </div>                                
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group py-2">
-                                        <input type="email" class="form-control form-control-input" id="exampleFormControlInput2" placeholder="Enter phone number">
-                                    </div>                                 
-                                </div>
-                            </div>
-                            <div class="form-group py-1">
-                                <input type="email" class="form-control form-control-input" id="exampleFormControlInput3" placeholder="Enter email">
-                            </div>  
-                            <div class="form-group py-2">
-                                <textarea class="form-control form-control-input" id="exampleFormControlTextarea1" rows="6" placeholder="Message"></textarea>
-                            </div>                            
-                        </div>
-                        <div class="my-3">
-                            <a class="btn form-control-submit-button" href="#your-link">Submit</a>
-                        </div>
-                    </div> <!-- end of div -->
-                </div> <!-- end of col -->
-                <div class="col-lg-6 d-flex align-items-center" data-aos="fade-down">
-                    <img class="img-fluid d-none d-lg-block" src="front/assets/images/contact.jpg" alt="contact">        
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </section> <!-- end of contact -->
-
-
-    <!-- Location -->
-    <section class="location text-light py-5">
-        <div class="container" data-aos="zoom-in">
-            <div class="row">
-                <div class="col-lg-3 d-flex align-items-center">
-                    <div class="p-2"><i class="far fa-map fa-3x"></i></div>
-                    <div class="ms-2">
-                        <h6>Adresse</h6>
-                        <p>El Ghazela Ariana</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center" >
-                    <div class="p-2"><i class="fas fa-mobile-alt fa-3x"></i></div>
-                    <div class="ms-2">
-                        <h6>Téléphone</h6>
-                        <p>(800) 265  216 2020</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center" >
-                    <div class="p-2"><i class="far fa-envelope fa-3x"></i></div>
-                    <div class="ms-2">
-                        <h6>Mail</h6>
-                        <p>hawes@gmail.com</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 d-flex align-items-center" >
-                    <div class="p-2"><i class="far fa-clock fa-3x"></i></div>
-                    <div class="ms-2">
-                        <h6>Disponibilité</h6>
-                        <p>09:00 AM - 20:00 PM</p>
-                    </div>
-                </div>
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </section> <!-- end of location -->
-
+  
 
    
 {% endblock  %}

@@ -65,6 +65,12 @@ class Participant
      * @ORM\JoinColumn(nullable=false)
      */
     private $randonnee;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participant")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -134,11 +140,6 @@ class Participant
     }
     protected $captchaCode;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="participant")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
     
     public function getCaptchaCode()
     {

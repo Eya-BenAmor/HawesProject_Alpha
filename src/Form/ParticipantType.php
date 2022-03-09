@@ -35,14 +35,14 @@ class ParticipantType extends AbstractType
                 ]
                
             ])
-          /*  ->add('captchaCode', CaptchaType::class, array(
+            ->add('captchaCode', CaptchaType::class, array(
                 'captchaConfig' => 'ExampleCaptchaUserRegistration',
                 'constraints' => [
                     new ValidCaptcha([
                         'message' => 'Invalid captcha, please try again',
                     ]),
                 ],
-            ))*/
+            ))
         ;
     }
 

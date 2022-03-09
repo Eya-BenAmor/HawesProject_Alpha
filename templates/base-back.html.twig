@@ -29,9 +29,9 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href={{path('index')}}>Hawes</a>
+          <a class="navbar-brand brand-logo" href={{path('stats')}}>Hawes</a>
        
-          <a class="navbar-brand brand-logo-mini" href={{path('index')}}><img src="back/assets/images/Image2.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href={{path('stats')}}><img src="back/assets/images/Image2.png" alt="logo" /></a>
           
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -48,7 +48,7 @@
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
                {%block image %}
-                  <img src="back/assets/images/faces/Image1.png" alt="image">
+                  
               {%endblock%}
                 </div>
                 <div class="nav-profile-text">
@@ -83,7 +83,7 @@
           
             <li class="nav-item nav-category">Main</li>
             <li class="nav-item">
-              <a class="nav-link" href={{path('index')}}>
+              <a class="nav-link" href={{path('stats')}}>
                 <span class="icon-bg"><i class="mdi mdi-cube menu-icon"></i></span>
                 <span class="menu-title">Tableau de bord</span>
               </a>
@@ -115,25 +115,14 @@
               </div>
             </li>
           
-            <li class="nav-item sidebar-user-actions">
-              <div class="sidebar-user-menu">
-                <a href="#" class="nav-link"><i class="mdi mdi-settings menu-icon"></i>
-                  <span class="menu-title">Paramètres</span>
-                </a>
-              </div>
-            </li>
+          
             <li class="nav-item sidebar-user-actions">
               <div class="sidebar-user-menu">
                 <a href={{path('indexFront')}} class="nav-link"><i class="mdi mdi-speedometer menu-icon"></i>
                   <span class="menu-title"  href={{path('indexFront')}} >Visiter le site</span></a>
               </div>
             </li>
-            <li class="nav-item sidebar-user-actions">
-              <div class="sidebar-user-menu">
-                <a href="#" class="nav-link"><i class="mdi mdi-logout menu-icon"></i>
-                  <span class="menu-title">Déconnecter</span></a>
-              </div>
-            </li>
+           
           </ul>
         </nav>
 
