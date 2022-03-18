@@ -1,0 +1,79 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}tableau de bord {% endblock %}
+{% block css %}
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="back/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="back/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="back/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="back/assets/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="back/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="back/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="back/assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+    {% endblock %}
+{% block body %}
+
+
+               
+<div class="main-panel">
+          <div class="content-wrapper">
+   
+            <div class="row">
+            
+             
+            
+    <h1>Statistiques des participants par randonnée </h1>
+    <canvas id="categories" width="400" height="100"></canvas>
+
+   
+</div>
+
+    </div>         
+   
+                  
+
+
+{% endblock %}
+
+
+
+ {% block js %}
+    <script src="back/assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="back/assets/vendors/jquery-circle-progress/js/circle-progress.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+   
+    <script src="back/assets/js/off-canvas.js"></script>
+    <script src="back/assets/js/hoverable-collapse.js"></script>
+    <script src="back/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="back/assets/js/dashboard.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+<script>
+    let categories = document.querySelector("#categories")
+    let categGraph = new Chart(categories, {
+        type: "pie",
+        data: {
+            labels: {{ Nom|raw }},
+            datasets: [{
+                data: {{ Count|raw }},
+                backgroundColor:{{ Couleur|raw }}
+            }]
+        }
+    })
+   
+</script>
+
+    {% endblock %}

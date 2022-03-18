@@ -1,0 +1,12 @@
+{% extends 'admin/bars.html.twig' %}
+
+{% block contenpage %}
+    <div>
+        <p>
+        <h2>Liste  des participents</h2>
+        </p>
+    </div>
+    <img src="{{ qr_code_data_uri(response, 'response') }}" />
+
+
+{% endblock %}

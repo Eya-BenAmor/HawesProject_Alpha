@@ -17,7 +17,7 @@
 
     {% endblock %}
     {%block image %}
-                  <img src="back/assets/images/faces/Image1.png" alt="image">
+                 
               {%endblock%}
              
 {% block body %}
@@ -55,7 +55,7 @@
   
   <tr>
    <th>Client </th>
-   <th>Randonnée </th>
+ 
    
     <th>Age</th>
     <th>Téléphone</span></th>
@@ -67,13 +67,14 @@
   {%for r in parti %}
   <tr>
    <td> {{r.user.nom~r.user.prenom}} </td>
-<td> {{r.randonnee.nomRando}}  </td>
+
     <td> {{r.age}} </td>
 <td> {{r.tel}}  </td>
 <td> {{r.maladie}}  </td>
 <td> {{r.classe}}  </td>
 <td> <a href="{{path('modifierParticipant',{'id':r.id})}}" class="fa fa-edit"  > </a>
-<a href="{{path('supprimerParticipant',{'id':r.id})}}"  class="fa fa-trash" ></a> </td>
+<a href="{{path('supprimerParticipant',{'id':r.id})}}"  class="fa fa-trash" ></a>
+ <a href="{{ path('qrcode' , {'id' : r.id}) }}" class="fa fa-qrcode"></a> </td>
   </tr>
   
   
